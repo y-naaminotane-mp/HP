@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+body{
+	background-color:#D1EDFF;	/*背景色*/
+	color		:#0f0f0f;	/*文字全体の色*/
+	text-align	:center;	/*テキストを中心*/
+	margin		:0;
+	padding		:0;
+}
+
+#head{
+	background-color:#269EEE;
+	color		:#f0f0f0;
+}
+
+#head h1{
+	font-size	:30px;
+	font-family	:"Comic Sans MS";
+}
+
+#head h2{
+	font-size	:15px;
+}
+
