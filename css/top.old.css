@@ -1,0 +1,106 @@
+@charset "utf-8";
+
+
+/*****
+パソコン用スタイルシート
+
+******/
+@media (min-width:960pt){
+	body{
+		background-color	:#D1EDFF;	
+		color				:#0f0f0f;	
+		text-align			:center;	
+		width				:940pt;
+		margin				:auto;
+	}
+
+	#head{
+		background-color	:#269EEE;
+		color				:#f0f0f0;
+		margin-top			:10pt;
+		border				:10pt dotted;
+	}
+	
+	#head h1{
+		font-size			:35px;
+		font-family			:"Comic Sans MS",Georgia,sans-serif;
+		text-align			:center;
+		width				:40%;
+		text-shadow			:5px 5px 3px #000000;
+		padding-left		:30pt;
+	}
+
+	#head p{
+		font-size			:15px;
+		color				:#f6f6f6;
+		width				:30%;
+		background-color	:#0f0f0f;
+		position			:absolute;
+		top					:20pt;
+		right				:200pt;	
+	}
+
+	#link ul{
+		background-color	:#ffffff;
+		text-align:right;
+		
+	}
+	
+	#link li{
+		font-size			:18px;
+		font-family			:"Lucida Console", Monaco, monospace;
+		font-weight			:bolder;
+		display				:inline;
+		list-style-type		:disc;
+		padding				:0pt 5pt;
+	}
+		
+	#profile{
+		float				:left;
+		width				:300pt;
+		height				:200pt;
+		background-color	:#41FAF0;
+	}
+
+	#profile h2{
+		font-size			:19px;
+		font-family			:"Arial Black", Gadget, sans-serif;
+		color				:#768C06;
+	}
+	
+	#profile section{
+		font-size			:15px;
+	}
+	
+	#kiji{
+		float				:right;
+		width				:620pt;
+		height				:400pt;
+		background-color	:#41FAF0;
+	
+	}
+
+	#kiji h1{
+		font-size			:20px;
+		font-family			:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	
+	}
+
+	#kiji article{
+		font-size			:15px;
+		font-family			:Verdana, Geneva, sans-serif;
+		
+	}
+
+	#food{
+		clear:both;
+	}
+
+
+
+	#copyright{
+		font-size			:13px;
+		background-color	:#3B3B3B;
+		color				:#9FC6FF;
+	}
+}
