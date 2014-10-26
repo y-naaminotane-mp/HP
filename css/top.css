@@ -222,7 +222,7 @@ body{
 
 **********************************************/
 
-@media only screen and (min-width:600px){
+@media only screen and (min-width:480px){
 	
 	#wrapper{
 		margin				:auto 3% auto 3%;							/*コンテンツ全体の調整　縦マージン：０　横マージン：オート*/
