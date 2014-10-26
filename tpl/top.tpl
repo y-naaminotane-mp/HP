@@ -19,7 +19,7 @@
 <!--サイト内リンク-->
 	<nav id="link">
 		<ul>
-		 <li><a href="top.html">●TOP</a></li>
+		 <li><a href="index.html">●TOP</a></li>
   		 <li><a href="profile.html">●PROFILE</a></li>
 		 <li><a href="sitemap.html">●MENU</a></li>
 		</ul>
