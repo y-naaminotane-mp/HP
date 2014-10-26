@@ -35,10 +35,10 @@
 
 /*全体*/
 body{
-	background-color	:#D1EDFF;							/*全体の背景*/
+	background-color		:#D1EDFF;							/*全体の背景*/
 	color				:#0f0f0f;							/*文字色*/
 	text-align			:center;							/*テキストを全体中央に*/
-	liner-height		:1.5;								/*文字の高さ間隔*/
+	liner-height			:1.5;								/*文字の高さ間隔*/
 	min-width			:320px;								/*表示できる最小サイズ*/
 	display				:block;
 	margin				:auto;
@@ -47,7 +47,7 @@ body{
 
 /*コンテンツ全体構成*/
 #wrapper{
-	max-width			:940px;								/*全体の最大幅*/
+	max-width			:1040px;								/*全体の最大幅*/
 	margin				:auto 5% auto 5%;					/*コンテンツ全体の調整　縦マージン：０　横マージン：オート*/
 
 }
@@ -75,7 +75,7 @@ body{
 
 /*リンクのスタイル*/
 #link{
-/*	text-align			:center;							/*中央揃え*/
+	text-align			:right;							/*中央揃え*/
 
 }
 
@@ -92,19 +92,31 @@ body{
 
 /*メインコンテンツ*/
 #kiji{
-	background-color	:#f0f0f0;							/*メインコンテンツの*/
+/*	background-color	:#f0f0f0;							/*メインコンテンツの*/
 	color				:#0f0f0f;							/*コンテンツの色はちょっと変える*/
 /*	text-align			:center;							/*中央揃え*/
+	border-width		:0;									/*ボーダー部分の広さ*/
 }
 /*コンテンツの題名*/
 #kiji h1{
 	font-family			:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	
 }
+/*コンテンツの日時*/
+#kiji h5{
+	text-align			:right;								/*日時は右に*/
+	padding				:0;									/*パディングは0*/
+	margin				:0;									/*マージンも0*/
+}
+
 /*コンテンツ内容*/
 #kiji article{
 	font-family			:Verdana, Geneva, sans-serif;		/*記事の題名と内容のフォントは変更される*/
-		
+	text-align			:left;								/*テキストは左揃え*/	
+}
+
+.kiji_wrap{
+	background-color	:#f0f0f0;							/*記事をひとつづつ白いので囲む*/
 }
 
 /*プロフィール全体*/
@@ -160,7 +172,7 @@ body{
 	}
 
 	#link ul{
-		margin			:5px 0;								/*リンクの場所調整*/
+		margin			:10px 0 0 0;								/*リンクの場所調整*/
 		padding			:0;									/*リンクの位置調整*/
 	}
 
@@ -171,15 +183,29 @@ body{
 	
 /*メインコンテンツ*/
 	#kiji{
+		padding			:0;									/*記事とリンクとの間の間隔*/
+		margin			:0;									/*記事との間隔*/
 		
 	}
 /*コンテンツの題名*/
 	#kiji h1{
 		font-size		:17px;								/*コンテンツ題名のフォントサイズ*/
 	}
+	#kiji h3{
+		font-size:		:10px;								/*日時の文字サイズ*/
+	}
+	
 /*コンテンツ内容*/
 	#kiji article{
-		font-size		:12px;								/*コンテンツ記事のフォントサイズ*/
+		font-size		:18px;								/*コンテンツ記事のフォントサイズ*/
+		line-height		:1.5;								/*行間の幅*/
+		text-align		:left;								/*記事のテキストは左ぞろえに*/
+	}
+	
+/*コンテンツ記事内容を囲むやつの*/
+	.kiji_wrap{
+		padding			:3%;								/*記事と枠の間の*/
+		margin			:0% 0% 2% 1%;							/*枠と外との*/
 	}
 
 /*プロフィール*/
@@ -222,7 +248,7 @@ body{
 
 **********************************************/
 
-@media only screen and (min-width:480px){
+@media only screen and (min-width:720px){
 	
 	#wrapper{
 		margin				:auto 3% auto 3%;							/*コンテンツ全体の調整　縦マージン：０　横マージン：オート*/
@@ -241,7 +267,7 @@ body{
 	
 	#profile{
 		float			:left;											/*プロフィールを左に寄せる*/
-		width			:15%;											/*プロフィールの範囲*/
+		width			:19%;											/*プロフィールの範囲*/
 		margin			:1% 1.5% 1% 0;									/*プロフィールマージン*/
 		padding			:3%;											/*プロフィールのパディング*/
 	}
@@ -250,9 +276,14 @@ body{
 		float			:right;											/*記事は右*/
 		width			:70%;											/*記事の範囲*/
 		margin			:1% 0% 1% 1.5%;									/*記事のマージン*/
-		padding			:3%;											/*記事のパディング*/
+		padding			:0 0 0 1.5%;											/*記事のパディング*/
 
 	}
+	
+	#kiji h1{
+		font-size		:28px;								/*コンテンツ題名のフォントサイズ*/
+	}
+
 	
 	#food{
 		clear			:both											/*フロートの解除*/

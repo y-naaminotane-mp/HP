@@ -39,7 +39,7 @@ $test = queryarray($q);
 //tplにアサインする
 
 $smarty_c -> assign("kiji_title",$kiji_title);		//記事のタイトル
-$smarty_c -> assign("kiji_date",$kiji_date);
+$smarty_c -> assign("kiji_date",$kiji_date);		//記事の日時
 $smarty_c -> assign("kiji",$kiji);			//記事内容
 $smarty_c -> display("../tpl/top.tpl");			//記事をテンプレートへ！！！！
 ?>

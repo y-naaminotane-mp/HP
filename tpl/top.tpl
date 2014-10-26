@@ -28,9 +28,18 @@
 
 <!--ブログのメインコンテンツがここに置かれている-->
 <main id="kiji">
-	<h1>{$kiji_title}</h1>
+
+<!--ループを開始！！！！！-->
+{section name="var" loop=6}
+<div class="kiji_wrap">
+	<h1>{$kiji_title[var]}</h1>
+	<h5>{$kiji_date[var]|date_format:"%Y年%m月%d日"}</h5>
 	<article>
-	<p>コンテンツはここに書かれてくる</p>
+	<p>{$kiji[var]|truncate:50}</p>
+</div >
+{/section}
+<!--ループ完了！！！！！！-->
+
 	</article>
 </main>
 
