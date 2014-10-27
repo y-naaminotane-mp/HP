@@ -2,7 +2,7 @@
 <html lang="ja"><head><title>ホームページ</title>
 
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="../css/top.css" type="text/css">
+	<link rel="stylesheet" href="../css/art.css" type="text/css">
     <link rel="stylesheet" href="../css/temple.css" type="text/css">
     </head>
 <body>
@@ -25,40 +25,24 @@
 		 <li><a href="sitemap.html">●MENU</a></li>
 		</ul>
 	</nav>
-
-
-
-<main id="kiji">
-
+    
+<main id="kiji">   
+    
+    
 <!------------------------------------------------------------------------------------------------------
 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 ここまで共通部分（スタイルシート除く）
 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 ---------------------------------------------------------------------------------------------------------->
 
-
-
-
-<!--ブログのメインコンテンツがここに置かれている-->
-
-
-<!--ループを開始！！！！！-->
-{section name="var" loop=6}
-<div class="kiji_wrap">
-	<h1>{$kiji_title[var]|truncate:20}</h1>
+<!----------メイン記事の内容------------->
+<div class="art_wrap">
+	<h1>{$kiji_title[var]}</h1>
 	<h5>{$kiji_date[var]|date_format:"%Y年%m月%d日"}</h5>
 	<article>
-	<p>{$kiji[var]|truncate:50}</p>
-    <p class="morepage"><a href="article.html?kiji_num={$kijinumber[var]}">続きを見る</a><p>
+	<p>{$kiji[var]}</p>
 	</article>
-</div >
-
-{/section}
-<!--ループ完了！！！！！！-->
-
-
-
-<!--記事終了-->
+</div>
 
 
 

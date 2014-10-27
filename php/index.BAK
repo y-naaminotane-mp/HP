@@ -66,7 +66,7 @@ article.html?kiji_num=なんとかかんとか
 
 を入れるようにする
 
-urlencodeする対象⇒「kiji_num=」の下部分
+urlencodeする対象⇒「kiji_num=」の部分
 
 **************************************************/
 
@@ -75,8 +75,8 @@ for($i=0; $i<count($kiji_num); $i++){
 	$a = null;
 	
 	//リンクの下部分をまとめる
-
-	$a =$kiji_num[$i];
+	$a = 'kiji_num=';
+	$a.=$kiji_num[$i];
 	
 	//次にhtmlspecialcharsしてからurlencodeして配列に格納
 	$kijinumber[] = urlencode($a);

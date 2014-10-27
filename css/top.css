@@ -1,315 +1,62 @@
 @charset "utf-8";
 
 /**************************
-サイト構成用スタイルシート
-@mp-naaminotane		2014-10-24
+サイトトップ専用スタイルシート
+@mp		2014-10-24			記事の内容を背景白に設定する。
 
-
-
-大体の概要
-
-・初めに全体の構成
-・次にスマホ用スタイル
-・最後にパソコン、タブレットスタイル
-
-全体の構成では配色などを決めていく
-大枠での配置は全体の攻勢で決めていくが、
-文字の大きさや配置の細かい設定についてはそれぞれのデバイスごとに設定を変更していく
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-ここのスタイルシートではメジャーブレークポイントを600pt
-マイナーブレークポイントを960ptで想定しています
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-⇒スマホ用
-	大きさ320pt-600ptまでの大きさを想定
-	
-⇒パソコン、タブレット
-	大きさは600pt-960ptがタブレットとして想定
-	それ以上はパソコン用で全体を微調整する
 	
 **************************/
 
-/*共通の構成*/
+/*各機種共通の構成*/
 
-
-/*全体*/
-body{
-	background-color		:#D1EDFF;							/*全体の背景*/
-	color				:#0f0f0f;							/*文字色*/
-	text-align			:center;							/*テキストを全体中央に*/
-	liner-height			:1.5;								/*文字の高さ間隔*/
-	min-width			:320px;								/*表示できる最小サイズ*/
-	display				:block;
-	margin				:auto;
-	padding				:auto;
-}
-
-/*コンテンツ全体構成*/
-#wrapper{
-	max-width			:1040px;								/*全体の最大幅*/
-	margin				:auto 5% auto 5%;					/*コンテンツ全体の調整　縦マージン：０　横マージン：オート*/
-
-}
-
-/*ヘッダー部分の装飾*/
-#head{
-	background-color	:#269EEE;							/*ヘッダー背景*/
-	color				:#f0f0f0;							/*文字色*/
-	margin-top			:10px;								/*ヘッダーの上部分の空間*/
-	border				:10px dotted;						/*装飾*/
-	text-align			:center;							/*中央そろえ*/
-}
-
-/*ヘッダー文字装飾*/
-#head h1{
-	font-family			:"Comic Sans MS",Georgia,sans-serif;/*ヘッダーフォント　コミックサンズMS使用*/
-	text-shadow			:5px 5px 3px #000000;				/*ヘッダー文字に影を入れる*/
-}
-
-/*ヘッダー追記部分、サイトの簡単な説明*/
-#head p{
-	color				:#f6f6f6;							/*文字色*/
-	background-color	:#0f0f0f;							/*背景色*/
-}
-
-/*リンクのスタイル*/
-#link{
-	text-align			:right;							/*中央揃え*/
-
-}
-
-#link ul{
-	background-color	:#41FAF0;							/*リンク背景*/
-}
-
-#link ul li{
-	font-family			:"Lucida Console", Monaco, monospace;/*リンクの文字フォント*/
-	font-weight			:bolder;							/*フォントの大きさ*/
-	display				:inline;							/*リンクを横並びに*/	
-}
-
-
-/*メインコンテンツ*/
-#kiji{
-/*	background-color	:#f0f0f0;							/*メインコンテンツの*/
-	color				:#0f0f0f;							/*コンテンツの色はちょっと変える*/
-/*	text-align			:center;							/*中央揃え*/
-	border-width		:0;									/*ボーダー部分の広さ*/
-}
-/*コンテンツの題名*/
-#kiji h1{
-	font-family			:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-	
-}
-/*コンテンツの日時*/
-#kiji h5{
-	text-align			:right;								/*日時は右に*/
-	padding				:0;									/*パディングは0*/
-	margin				:0;									/*マージンも0*/
-}
-
-/*コンテンツ内容*/
-#kiji article{
-	font-family			:Verdana, Geneva, sans-serif;		/*記事の題名と内容のフォントは変更される*/
-	text-align			:left;								/*テキストは左揃え*/	
-}
-
+/*記事単位ごとの設定*/
 .kiji_wrap{
 	background-color	:#f0f0f0;							/*記事をひとつづつ白いので囲む*/
-}
-
-/*プロフィール全体*/
-#profile{
-/*	text-align			:center;							/*中央揃え*/
-	background-color	:#41FAF0;							/*プロフィール背景*/
-}
-
-/*プロフィール題名のフォント*/
-#profile h2{
-	font-family			:"Arial Black", Gadget, sans-serif;	/*プロフィールのフォント*/
-	color				:#768C06;							/*プロフィールのフォントカラー*/
-}
-
-/*プロフィールの内容*/
-#profile section{
-}
-
-/*フッター部分*/
-#food{
-/*	text-align			:center;							/*中央揃え*/
-}
-
-/*コピーライトの内容*/
-#copyright{
-	background-color	:#3B3B3B;							/*コピーライト背景*/
-	color				:#9FC6FF;							/*コピーライト文字色*/
+	padding				:3%	;								/*記事と枠との間*/
+	margin-bottom		:3%;								/*別の記事との間隔*/
+	box-shadow			:3px 3px 3px 1px;					/*記事ボックスの影*/
 }
 
 
-
+/*記事の続きを見るボタンのスタイル*/
+.morepage{
+	text-align			:center;							/*テキストは中心に*/
+	border-style		:solid;								/*ボタンの枠線の指定*/
+	border-radius		:10px;								/*ボタンを丸くする*/
+	box-shadow			: 3px 3px 5px 2px ;					/*ボタン周りの影*/
+	background-color	:#ffffff;							/*背景色*/
+	color				:#0f0f0f;							/*文字色*/
+}
 
 
 /************************
 	スマホ用スタイルシート
-
-
 *************************/
-
-/*ヘッダー用*/
-	#head h1{
-		font-size		:30px;								/*題名フォントサイズ*/
-		margin			:0px;								/*ヘッドの題名位置調整*/
-	}
-
-	#head p{
-		font-size		:12px;								/*題名説明フォントサイズ*/
-	}
 	
-/*リンク*/
-	#link{
-		font-size		:16px;								/*リンクのフォントサイズ*/
-	}
 
-	#link ul{
-		margin			:10px 0 0 0;								/*リンクの場所調整*/
-		padding			:0;									/*リンクの位置調整*/
-	}
-
-	#link ul li{
-		width			:25%;								/*リンクの幅*/
-		padding			:0 5%;								/*リンクの幅を調整*/
-	}
-	
-/*メインコンテンツ*/
-	#kiji{
-		padding			:0;									/*記事とリンクとの間の間隔*/
-		margin			:0;									/*記事との間隔*/
-		
-	}
-/*コンテンツの題名*/
-	#kiji h1{
-		font-size		:17px;								/*コンテンツ題名のフォントサイズ*/
-	}
-	#kiji h3{
-		font-size:		:10px;								/*日時の文字サイズ*/
-	}
-	
-/*コンテンツ内容*/
-	#kiji article{
-		font-size		:18px;								/*コンテンツ記事のフォントサイズ*/
-		line-height		:1.5;								/*行間の幅*/
-		text-align		:left;								/*記事のテキストは左ぞろえに*/
-	}
-	
-/*コンテンツ記事内容を囲むやつの*/
-	.kiji_wrap{
-		padding			:3%;								/*記事と枠の間の*/
-		margin			:0% 0% 2% 1%;							/*枠と外との*/
-	}
-
-/*プロフィール*/
-	#profile{
-		padding			:0;
-		margin			:0;
-	}
-
-/*プロフィール題名のフォント*/
-	#profile h2{
-		font-size		:15px;								/*プロフィールのフォント変更*/
-	}
-
-/*プロフィールの内容*/
-	#profile section{
-		font-size		:12px;								/*プロフィール説明のフォント変更*/
-	}
-
-/*フッター部分*/
-	#food{
-	}
-
-/*コピーライト*/
-	#copyright{
-		font-size		:10px;
-	}
-	
-	
 /*********************************************
 スマホ用終わり
-
-
 **********************************************/
 
 /*********************************************
 以下タブレット用追加
-
-ヘッダーの題名フォントを大きく
-
-
 **********************************************/
 
-@media only screen and (min-width:720px){
-	
-	#wrapper{
-		margin				:auto 3% auto 3%;							/*コンテンツ全体の調整　縦マージン：０　横マージン：オート*/
+	@media only screen and (min-width:720px){
 
-	}
-	
-	
-/*ヘッダー*/
-	#head h1{
-		font-size		:45px;											/*ヘッダーの文字変更*/
-	}
-	
-	#head p{
-		font-size		:15px;											/*ヘッダー説明文字変更*/
-	}
-	
-	#profile{
-		float			:left;											/*プロフィールを左に寄せる*/
-		width			:19%;											/*プロフィールの範囲*/
-		margin			:1% 1.5% 1% 0;									/*プロフィールマージン*/
-		padding			:3%;											/*プロフィールのパディング*/
-	}
-	
-	#kiji{
-		float			:right;											/*記事は右*/
-		width			:70%;											/*記事の範囲*/
-		margin			:1% 0% 1% 1.5%;									/*記事のマージン*/
-		padding			:0 0 0 1.5%;											/*記事のパディング*/
-
-	}
-	
-	#kiji h1{
-		font-size		:28px;								/*コンテンツ題名のフォントサイズ*/
-	}
-
-	
-	#food{
-		clear			:both											/*フロートの解除*/
-	}
 }
 
-	
+
 /*********************************************
 タブレット用終わり
-
-
 **********************************************/
+
+
 
 /*********************************************
 以下大きい画面用追加
 
-前回分の微調整
-
-
 **********************************************/
 @media only screen and (min-width:960px){
-	#wrapper{
-		margin:auto;
-	}
-	#head h1{
-		font-size:49px;
-	}
 
 }
