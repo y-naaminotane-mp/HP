@@ -12,6 +12,9 @@
 
 .art_wrap{
 	background-color	:#f0f0f0;							/*記事を白いので囲む*/
+	padding				:3%	;								/*記事と枠との間*/
+	margin-bottom		:3%;								/*別の記事との間隔*/
+	box-shadow			:3px 3px 3px 1px;					/*記事ボックスの影*/
 }
 
 

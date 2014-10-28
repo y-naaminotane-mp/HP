@@ -21,8 +21,64 @@ include "./func/dbh.php";
 
 
 
+/**************************************************
+
+ここから記事ページの開始
+
+**************************************************/
 
 
-var_dump($_GET);
+if(!isset($_GET['kiji_num'])){
+
+//ゲットがなければトップに移動する
+	header("Location:index.html");
+	
+	exit('トップページへ移動します');
+}else{
+//変数を格納する
+	$a = "";
+	$a = $_GET['kiji_num'];
+}
+
+
+
+
+
+//記事のSQLを作成する
+$q = " select kiji_title,kiji,kiji_date from kiji";	//記事内容、記事タイトル、記事日時
+$q.= " where kiji_num = ".$a;				//ゲットしたやつを条件文に
+$q.= " limit 1 ";						//念のため一つだけ取得するようにする
+
+var_dump("$q");
+
+
+//sqlから変数に格納
+queryarray($q);
+
+/***************************************************
+変数
+$kiji
+$kiji_title
+$kiji_date
+
+各々がひとつづつ格納
+
+***************************************************/
+
+//tplにアサインする
+
+$smarty_c -> assign("kiji_title",$kiji_title);		//記事のタイトル
+$smarty_c -> assign("kiji_date",$kiji_date);		//記事の日時
+$smarty_c -> assign("kiji",$kiji);			//記事内容
+
+
+$smarty_c -> display("../tpl/article.tpl");			//記事をテンプレートへ！！！！
+
+
+
+//データベース切断
+$dbh = null;
+
+
 
 ?>

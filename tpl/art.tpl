@@ -37,10 +37,10 @@
 
 <!----------メイン記事の内容------------->
 <div class="art_wrap">
-	<h1>{$kiji_title[var]}</h1>
-	<h5>{$kiji_date[var]|date_format:"%Y年%m月%d日"}</h5>
+	<h1>{$kiji_title}</h1>
+	<h5>{$kiji_date|date_format:"%Y年%m月%d日"}</h5>
 	<article>
-	<p>{$kiji[var]}</p>
+	<p>{$kiji}</p>
 	</article>
 </div>
 
