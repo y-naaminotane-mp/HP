@@ -35,6 +35,16 @@ include "./func/dbh.php";
 ↓
 クエリーをカラム名に当てはめた配列に格納する（降順）
 
+記事のカテゴリを調べることも念頭にここに備忘録として記載
+select kiji.kiji_num, category_s.cate_s_name ,category.cate_name from kiji, cate_connect, category_s, category 
+where
+category.cate_no = category_s.cate_no
+and
+category_s.cate_no = cate_connect.cate_no
+and
+kiji.kiji_num = cate_connect.kiji_num
+
+
 
 **************************************************/
 

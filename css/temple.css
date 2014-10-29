@@ -276,6 +276,10 @@ body{
 	#kiji h1{
 		font-size		:28px;								/*コンテンツ題名のフォントサイズ*/
 	}
+	
+	#profile p{
+		text-align		:left;
+	}
 
 	
 	#food{

@@ -2,7 +2,7 @@
 <html lang="ja"><head><title>ホームページ</title>
 
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="../css/art.css" type="text/css">
+	<link rel="stylesheet" href="../css/profile.css" type="text/css">
     <link rel="stylesheet" href="../css/temple.css" type="text/css">
     </head>
 <body>
@@ -34,19 +34,13 @@
 ここまで共通部分（スタイルシート除く）
 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 ---------------------------------------------------------------------------------------------------------->
+<div class="profile_wrap">
+	<h1>プロフィール画面</h1>
 
-<!----------メイン記事の内容------------->
-<div class="art_wrap">
-	<h1>{$kiji_title}</h1>
-	<h5>{$kiji_date|date_format:"%Y年%m月%d日"}</h5>
-    <h5>カテゴリ：{$cate_name}	:{if isset($cate_s_name)}{$cate_s_name}{/if}</h5>
 	<article>
-	<p><pre>{$kiji}</pre></p>
+	<p><pre>現在ここは工事中です</pre></p>
 	</article>
 </div>
-
-
-
 
 
 <!------------------------------------------------------------------------------------------------------

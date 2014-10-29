@@ -10,7 +10,7 @@
 /*共通の構成*/
 
 
-.art_wrap{
+.profile_wrap{
 	background-color	:#f0f0f0;							/*記事を白いので囲む*/
 	padding				:3%	;								/*記事と枠との間*/
 	margin-bottom		:3%;								/*別の記事との間隔*/
@@ -18,9 +18,9 @@
 
 }
 
-.art_wrap pre{
+.profile_wrap pre{
 	white-sqace			:pre-wrap;							/*記事文が途中でも枠に収まるように折り返す、改行をそのまま表示する*/
-/**	text-indent			:10px;								/*記事の初めを下げる*/
+	text-indent			:10px;								/*記事の初めを下げる*/
 	word-break			:break-word;						/*記事が記事内にお触るようにする*/
 
 }
@@ -42,12 +42,14 @@
 /*********************************************
 以下タブレット用追加
 
+ヘッダーの題名フォントを大きく
+
+
 **********************************************/
 
 	@media only screen and (min-width:720px){
 
 }
-
 
 
 	

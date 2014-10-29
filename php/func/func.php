@@ -41,16 +41,15 @@ function queryarray($a){
 	//実行したクエリーをカラム名を変数名にして結果を配列として格納
 		foreach($row as $rows){
 	//配列の数の判定
-			if(($a=count($row)) != 1){
+			if(($a=count($row)) != 1){			//20141028　配列内にいくつ格納されているかの判定
 				foreach($rows as $key2=>$val2){
 					
 	//グローバル変数をここで宣言する
 					global ${$key2};
 					${$key2}[] = $val2;
 				}
-			}else{
+			}else{						//20141028 配列が一つだけなら変数として格納する
 				foreach($rows as $key2=>$val2){
-	//グローバル変数をここで宣言する
 					global ${$key2};
 					${$key2} = $val2;
 				}

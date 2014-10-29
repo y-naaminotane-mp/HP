@@ -45,11 +45,10 @@ if(!isset($_GET['kiji_num'])){
 
 
 //記事のSQLを作成する
+$q = "";
 $q = " select kiji_title,kiji,kiji_date from kiji";	//記事内容、記事タイトル、記事日時
 $q.= " where kiji_num = ".$a;				//ゲットしたやつを条件文に
-$q.= " limit 1 ";						//念のため一つだけ取得するようにする
-
-var_dump("$q");
+$q.= " limit 1 ";					//念のため一つだけ取得するようにする
 
 
 //sqlから変数に格納
