@@ -57,23 +57,19 @@ include "./func/dbh.php";
 $q1 = "";
 $q1 = "select category.cate_no , category.cate_name from category";//カテゴリ大のクエリ作成
 
-//小カテゴリの選択
-$q2 ="";
-$q2 ="select cate_s_no , cate_s_name from category_s";
 
 queryarray($q1);
-queryarray($q2);
+
 $a=count($cate_no);
-$b=count($cate_s_no);
+
 
 $daikate = "";
 for ($i=0; $i<$a; $i++){
-	$daikate.="<option value=\"$cate_no[$i]\">$cate_name[$i]</option>";
-}
-
-$shoukate = "";
-for ($j=0; $j<$b; $j++){
-	$shoukate.="<option value=\"$cate_s_no[$j]\">$cate_s_name[$j]</option>";
+	if($cate_no[$i]==$cate_no_s){
+		$daikate.="<option value=\"$cate_no[$i]\" selected>$cate_name[$i]</option>";
+	}else{
+		$daikate.="<option value=\"$cate_no[$i]\" >$cate_name[$i]</option>";
+	}
 }
 
 
@@ -87,14 +83,36 @@ echo <<<body
 </fieldset>
 <br>
 
+body;
+
+?>
+
+
+
+<form action="<?php print $_SERVER["PHP_SELF"]; ?>" method="post">
 <fieldset>
 <legend>大カテゴリ入力(選択式)</legend>
 <label><select name="cate_no" size="6">
-$daikate
+<?php echo $daikate; ?>
 </select>
 </fieldset>
+</label>
+</form>
 <br>
 
+<?php //小カテゴリの選択
+$q2 ="";
+$q2 ="select cate_s_no , cate_s_name from category_s where cate_no = \"$_POST[cate_no]\"";
+
+queryarray($q2);
+
+$b=count($cate_s_no);
+$shoukate = "";
+for ($j=0; $j<$b; $j++){
+	$shoukate.="<option value=\"$cate_s_no[$j]\">$cate_s_name[$j]</option>";
+}
+
+echo <<<Body
 <fieldset>
 <legend>小カテゴリ入力(選択式)</legend>
 <label><select name="cate_s_no" size="6">
@@ -102,6 +120,7 @@ $shoukate
 </select>
 </fieldset>
 <br>
+
 
 <fieldset>
 <legend>大カテゴリ入力(入力式)</legend>
@@ -138,7 +157,7 @@ $shoukate
 <input type="submit" name="flag" value="投稿">
 
 </form>
-body;
+Body;
 
 $dbh = null;
 
