@@ -20,6 +20,9 @@ error_reporting(E_ALL & ~E_NOTICE);
 ***************************************************/
 //セッションの開始
 session_start();
+header('Expires:-1');
+header('Cache-Control:');
+header('Pragma:');
 
 //前の画面から戻ってきているかを確認する
 //if(isset($_SESSION['flag'])){
@@ -145,6 +148,7 @@ if(@$set_p=="0"){
 	if(isset($_POST['cate_no'])){
 		$cate_no_p ="";
 		$cate_no_p = $_POST['cate_no'];
+		$_SESSION['cate_no'] = "";
 	}
 	
 	$a = "";
@@ -195,7 +199,7 @@ cate_select;
 			//配列の数を調べる	
 		$shoucate = "";
 	
-		if(isset($_POST['cate_s_no'])){
+		if((isset($_POST['cate_s_no'])) || (isset($cate_no_p))){
 			$cate_s_no_p ="";
 			$cate_s_no_p = $_POST['cate_s_no'];
 			$_SESSION['cate_s_no'] = "";
@@ -204,12 +208,22 @@ cate_select;
 		$b = "";
 		$b = count($cate_s_no);
 		
-		for($i=0; $i<$b; $i++){
-			if(@$cate_s_no_p == $cate_s_no[$i]){
-				$shoucate.="<option value=\"cate_s_no[$i]\" selected>$cate_s_name[$i]</option>";
-   			}else{
-				$shoucate.="<option value=\"cate_s_no[$i]\">$cate_s_name[$i]</option>";
-			}	
+		
+		//カテゴリ小が１以上の時はループ、それ以外は一つだけ出す
+		if($b >1){
+			for($i=0; $i<$b; $i++){
+				if(@$cate_s_no_p == $cate_s_no[$i]){
+					$shoucate.="<option value=\"$cate_s_no[$i]\" selected>$cate_s_name[$i]</option>";
+	   			}else{
+					$shoucate.="<option value=\"$cate_s_no[$i]\">$cate_s_name[$i]</option>";
+				}	
+			}
+		}elseif($b == 1){
+			if($cate_s_no_p == $cate_s_no || $_POST['cate_s_no'] == $cate_s_no){
+				$shoucate = "<option value=\"$cate_s_no\" selected>$cate_s_name</option>";
+			}else{
+				$shoucate = "<option value=\"$cate_s_no\" >$cate_s_name</option>";
+			}
 		}
 /**********************カテゴリ小選択画面*****************************/
 echo <<<cate_select_s
@@ -247,12 +261,12 @@ cate_select_s;
 ********************************************************************/
 
 //カテゴリ大のテキスト確認
-	if(isset($_POST['cate_name'])){
+	if((isset($_POST['cate_name'])) || (isset($cate_name_p))){
 		$cate_name_p ="";
 		$cate_name_p = $_POST['cate_name'];
 	}
 //カテゴリ小のテキスト確認
-	if(isset($_POST['cate_s_name'])){
+	if((isset($_POST['cate_s_name'])) || (isset($cate_s_name_p))){
 		$cate_s_name_p ="";
 		$cate_s_name_p = $_POST['cate_s_name'];
 	}
@@ -277,23 +291,26 @@ textarea;
 
 
 //タイトルのテキスト確認
-	if(isset($_POST['kiji_title'])){
+	if((isset($_POST['kiji_title'])) || (isset($kiji_title_p))){
 		$kiji_title_p ="";
 		$kiji_title_p = $_POST['kiji_title'];
+		$_SESSION['kiji_title'] = "";
 	}
 	
 	
 	
 //記事のテキスト確認
-	if(isset($_POST['kiji'])){
+	if((isset($_POST['kiji'])) || (isset($kiji_p))){
 		$kiji_p ="";
 		$kiji_p = $_POST['kiji'];
+		$_SESSION['kiji'] = "";
 	}
 
 //記事の日時確認
-	if(isset($_POST['kiji_date'])){
+	if((isset($_POST['kiji_date'])) || (isset($kiji_date_p))){
 		$kiji_date_p ="";
 		$kiji_date_p = $_POST['kiji_date'];
+		$_SESSION['kiji_date'] = "";
 	}
 
 
@@ -381,6 +398,9 @@ $hidden
 </form>
 
 hidden_button;
+
+
+$dbh = null;
 ?>
 </body>
 </html>

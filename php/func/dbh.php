@@ -9,9 +9,9 @@ try{
 //接続できた場合は文字コードを改めてutf8に変換する
 //	echo "接続が確認できました<br>";			//デバッグ用の文字。当面は削除しておく
 //文字コードをUTF8に変更する
-	$dbh -> query("SET NAMES UTF8");
+		$dbh -> query("SET NAMES UTF8");
 //PDO接続のためのものをスーパーグローバル変数に格納する
-	$GLOBALS["dbh"] = $dbh;
+		$GLOBALS["dbh"] = $dbh;
 	}else{
 //接続情報がNULLであった場合は失敗にする
 		die('接続失敗');
