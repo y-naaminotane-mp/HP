@@ -3,7 +3,7 @@
 トップ画面
 
 	mp	20141026	トップ画面作成
-
+	mp	20141102	カテゴリ項目の追加
 
 
 
@@ -36,13 +36,11 @@ include "./func/dbh.php";
 クエリーをカラム名に当てはめた配列に格納する（降順）
 
 記事のカテゴリを調べることも念頭にここに備忘録として記載
-select kiji.kiji_num, category_s.cate_s_name ,category.cate_name from kiji, cate_connect, category_s, category 
-where
-category.cate_no = category_s.cate_no
-and
-category_s.cate_no = cate_connect.cate_no
-and
-kiji.kiji_num = cate_connect.kiji_num
+select kiji.kiji_date ,category.cate_name, category_s.cate_s_name 
+from kiji 
+left join cate_connect on kiji.kiji_num = cate_connect.kiji_num 
+left join category on cate_connect.cate_no = category.cate_no 
+left join category_s on category.cate_no = category_s.cate_no;
 
 
 
@@ -50,8 +48,26 @@ kiji.kiji_num = cate_connect.kiji_num
 
 //クエリーの作成
 $q = "";								//クエリーの初期化
-$q = "select kiji, kiji_num, kiji_date, kiji_title from kiji";		
-$q.= " order by kiji_num desc ";
+//$q = "select kiji, kiji_num, kiji_date, kiji_title from kiji";				//DEL 20141102
+//$q.= " order by kiji_num desc ";												//DEL	20141102
+
+
+/****************************************************
+
+記事トップに必要な内容を取得する
+
+記事番号、記事内容、記事日時、カテゴリ、小カテゴリ
+記事タイトル
+
+****************************************************/
+
+$q ="select kiji.kiji_num, kiji.kiji_title, kiji.kiji, kiji.kiji_date ,category.cate_name, category_s.cate_s_name from kiji "; 
+$q.="left join cate_connect on kiji.kiji_num = cate_connect.kiji_num ";
+$q.="left join category on cate_connect.cate_no = category.cate_no ";
+$q.="left join category_s on category.cate_no = category_s.cate_no ";
+$q.="order by kiji.kiji_num desc";
+
+
 
 //カラム名に当てはめた配列に格納（function）
 
@@ -93,14 +109,21 @@ for($i=0; $i<count($kiji_num); $i++){
 }
 
 
+$kiji_count = count($kiji_num);
 
-//tplにアサインする
+
 
 $smarty_c -> assign("kiji_title",$kiji_title);		//記事のタイトル
 $smarty_c -> assign("kiji_date",$kiji_date);		//記事の日時
 $smarty_c -> assign("kiji",$kiji);			//記事内容
 $smarty_c -> assign("kijinumber",$kijinumber);		//記事の続きのURL
 
+//ADD 20141102
+$smarty_c -> assign("cate_name",$cate_name);		//カテゴリタグの追加
+$smarty_c -> assign("cate_s_name", $cate_s_name);	//カテゴリ小タグの追加
+
+//ADD 20141102	
+$smarty_c -> assign("kiji_count",$kiji_count);		//記事の数を追加
 
 $smarty_c -> display("../tpl/top.tpl");			//記事をテンプレートへ！！！！
 

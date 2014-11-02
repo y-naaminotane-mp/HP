@@ -3,7 +3,7 @@
 記事個別画面
 
 	mp	20141028	記事画面作成
-
+	mp	20141102	カテゴリの取得
 
 
 
@@ -46,19 +46,37 @@ if(!isset($_GET['kiji_num'])){
 
 //記事のSQLを作成する
 $q = "";
-$q = " select kiji_title,kiji,kiji_date from kiji";	//記事内容、記事タイトル、記事日時
-$q.= " where kiji_num = ".$a;				//ゲットしたやつを条件文に
-$q.= " limit 1 ";					//念のため一つだけ取得するようにする
+//	CHG 20141102	SQLの変更
+//$q = " select kiji_title,kiji,kiji_date from kiji";	//記事内容、記事タイトル、記事日時
+//$q.= " where kiji_num = ".$a;				//ゲットしたやつを条件文に
+//$q.= " limit 1 ";					//念のため一つだけ取得するようにする
+
+
+
+$q =" select kiji.kiji_num, kiji.kiji_title, kiji.kiji, kiji.kiji_date ,category.cate_name, category_s.cate_s_name from kiji "; 
+$q.=" left join cate_connect on kiji.kiji_num = cate_connect.kiji_num ";
+$q.=" left join category on cate_connect.cate_no = category.cate_no ";
+$q.=" left join category_s on category.cate_no = category_s.cate_no ";
+$q.=" where kiji.kiji_num = $a" ;
+$q.=" order by kiji.kiji_num desc";
+$q.=" limit 1";
+
+
 
 
 //sqlから変数に格納
 queryarray($q);
+
+
 
 /***************************************************
 変数
 $kiji
 $kiji_title
 $kiji_date
+
+
+
 
 各々がひとつづつ格納
 
@@ -69,7 +87,8 @@ $kiji_date
 $smarty_c -> assign("kiji_title",$kiji_title);		//記事のタイトル
 $smarty_c -> assign("kiji_date",$kiji_date);		//記事の日時
 $smarty_c -> assign("kiji",$kiji);			//記事内容
-
+$smarty_c -> assign("cate_name",$cate_name);		//カテゴリの追加 ADD 20141102
+$smarty_c -> assign("cate_s_name", $cate_s_name);	//カテゴリ小の追加　ADD 20141102
 
 $smarty_c -> display("../tpl/art.tpl");			//記事をテンプレートへ！！！！
 

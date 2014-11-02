@@ -194,7 +194,6 @@ cate_select;
 
 		queryarray($q2);
 		
-		var_dump($cate_s_name);
 		
 			//配列の数を調べる	
 		$shoucate = "";
@@ -204,6 +203,15 @@ cate_select;
 			$cate_s_no_p = $_POST['cate_s_no'];
 			$_SESSION['cate_s_no'] = "";
 		}
+		
+		
+		//カテゴリ小の入力用データの挿入
+		if((isset($_POST['cate_s_name'])) ||(isset($cate_s_name_p))){
+			$cate_s_name_p ="";
+			$cate_s_name_p =$_POST['cate_s_name'];
+			$_SESSION['cate_s_name'];
+		}
+		
 		
 		$b = "";
 		$b = count($cate_s_no);
@@ -233,6 +241,12 @@ echo <<<cate_select_s
 <select name="cate_s_no" size="6" onChange="submit(this.form)">
 $shoucate
 </select>
+<br>
+<!--//小カテゴリ入力（選択式）-->
+<legend>小カテゴリ入力</legend>
+<label>
+<input type="text" name="cate_s_name" value="$cate_s_name_p" onChange="submit(this.form)">
+</label>
 </fieldset>
 <br>
 cate_select_s;
@@ -363,8 +377,12 @@ if($set_p == "0"){
 	//大カテゴリ選択
 	$hidden.="<input type=\"hidden\" name=\"cate_no\" value=\"$cate_no_p\">";
 	//小カテゴリ選択
-		if(isset($cate_s_no_p)){
+		if(!empty($cate_s_name_p)){
+			$hidden.="<input type=\"hidden\" name=\"cate_s_name\" value=\"$cate_s_name_p\">";
+	//小カテゴリが入力されているとき
+		}elseif(!empty($cate_s_no_p)){
 			$hidden.="<input type=\"hidden\" name=\"cate_s_no\" value=\"$cate_s_no_p\">";
+
 		}
 //カテゴリ入力式の時
 }elseif($set_p == "1"){

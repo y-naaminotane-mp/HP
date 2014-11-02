@@ -24,7 +24,7 @@ $smarty_c -> compile_dir ="../templates_c/";
  *
  *
  *mp	20141028		取得データが一つだけなら配列ではなく変数に格納する
- *
+ *mp	20141102		取得できなかった時のSQLを表示する
  *
  *
  *
@@ -34,6 +34,8 @@ function queryarray($a){
 	$stmt = $GLOBALS["dbh"]->query("$a");
 	//アクセスに失敗した場合
 		if(!$stmt){
+			//ADD 20141102
+			echo"$a";
 			die("データの取得に失敗しました。");
 		}
 	$row = $stmt -> fetchAll(PDO::FETCH_ASSOC);
