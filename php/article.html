@@ -58,7 +58,7 @@ $q = "";
 $q =" select kiji.kiji_num, kiji.kiji_title, kiji.kiji, kiji.kiji_date ,category.cate_name, category_s.cate_s_name from kiji "; 
 $q.=" left join cate_connect on kiji.kiji_num = cate_connect.kiji_num ";
 $q.=" left join category on cate_connect.cate_no = category.cate_no ";
-$q.=" left join category_s on category.cate_no = category_s.cate_no ";
+$q.=" left join category_s on cate_connect.cate_s_no = category_s.cate_s_no ";
 $q.=" where kiji.kiji_num = $a" ;
 $q.=" order by kiji.kiji_num desc";
 $q.=" limit 1";

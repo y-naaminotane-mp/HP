@@ -75,8 +75,8 @@ kiji						kiji
 $q_cho ="";
 $q_cho ="select kiji, kiji_title, kiji_date from kiji ";
 $q_cho.=" where kiji = \"$kiji_p\" ";
-$q_cho.=" where kiji_title = \"$kiji_title_p\" ";
-$q_cho.=" where kiji_date = \"$kiji_date_p\" ";
+$q_cho.=" and kiji_title = \"$kiji_title_p\" ";
+$q_cho.=" and kiji_date = \"$kiji_date_p\" ";
 $q_cho.=" limit 1 ";
 
 if(queryexist($q_cho)){

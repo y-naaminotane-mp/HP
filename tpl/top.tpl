@@ -51,7 +51,8 @@
 			<article>
 			<p>{$kiji|truncate:150}</p>
 		    <p class="morepage"><a href="{$kijinumber}">続きを見る</a><p>
-		    <h5>カテゴリ:{$cate_name}　{if !empty($cate_s_name) } : {$cate_s_name} {/if}</h5>
+            <hr>
+		    <h5>カテゴリ:{$cate_name}　{if !empty($cate_s_name)}:{$cate_s_name} {/if}</h5>
 			</article>
 		</div >
 	{elseif count($kiji_num) >1}
@@ -66,8 +67,8 @@
 		<article>
 		  <p>{$kiji[$var]|truncate:150}</p>
 	      <p class="morepage"><a href="{$kijinumber[$var]}">続きを見る</a><p>
+          <hr>
 	      <h5>カテゴリ:{$cate_name[$var]}　{if !empty($cate_s_name) } : {$cate_s_name[$var]} {/if}</h5>
-		    <hr>
 	    </article>
 	  </div >
 	{/for}
@@ -88,7 +89,7 @@
     
     <!--ページ数-->
     {*ループについて*}
-    {*ゲット変数-2が1以下ならその右側全部を表示、ゲット変数以外にリンクつける*}
+    {*$_GETのページから右６個、左*}
     {*ゲット変数+2がトータルページ数以上の場合は右側全部を表示する*}
     
     
@@ -96,29 +97,33 @@
     
 	{if empty($smarty.get.page) || $smarty.get.page==1}
     	1
-        	{for $var=2 to $total_page}
-        		<a href="?page={$var}">{$var}</a>
-                	{if $var==6}
-                    	{break}
-                    {/if}
-			{/for}
+        	{if $total_page>1}
+        		{for $var=2 to $total_page}
+        			<a href="?page={$var}">{$var}</a>
+            	    	{if $var>6}
+            	        	{break}
+            	        {/if}
+				{/for}
+            {/if}
 	{elseif !empty($smarty.get.page) || $smarty.get.page!=1}
     	{for $var=$smarty.get.page-6 to $smarty.get.page}
         	{if $var<1}
             	{continue}
             {/if}
             {if $var==$smarty.get.page}
-            	{$smarty.get.page}
+            	{$var}
             {else}
 	            <a href="?page={$var}">{$var}</a>
             {/if}
         {/for}
-        {for $var=$smarty.get.page to $smarty.get.page+6}
-        	   	{if $var==$total_page}
-                	{break}
-                {/if}
-        	<a href="?page={$var}">{$var}</a>
-        {/for}
+        	{if $smarty.get.page!=$total_page}
+		        {for $var=$smarty.get.page+1 to $smarty.get.page+6}
+    	    	   	{if $var>$total_page}
+    	            	{break}
+    	            {/if}
+    	    	<a href="?page={$var}">{$var}</a>
+    		    {/for}
+            {/if}
     {/if}
         	 
     

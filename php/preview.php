@@ -127,18 +127,19 @@ ADD 20141103
 	}
 
 //カテゴリ小のとき
-	if(isset($_POST['cate_s_name']) || (isset($cate_s_name_p))){
+	if(isset($_POST['cate_s_name']) || (!empty($cate_s_name_p))){
 
 		$q_s_sel ="";
 		$q_s_sel =" select cate_no from category_s ";
 
-			if(isset($cate_s_name)){
+			if(!empty($cate_s_name)){
 				$q_s_sel.=" where cate_s_name = \"$cate_s_name\" ";
-			}elseif(isset($_POST['cate_s_name'])){
+			}elseif(!empty($_POST['cate_s_name'])){
 				$q_s_sel.=" where cate_s_name = ".'"'.htmlspecialchars($_POST['cate_s_name']).'"';		//htmlspecialchars
 			}
 
 		$q_s_sel.=" limit 1";
+
 
 		$cate_s_ex = queryexist($q_s_sel);
 		
