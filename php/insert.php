@@ -3,7 +3,7 @@
 インサート画面
 
 	mp	20141101	インサート画面作成
-
+	mp	20141105	重複排除
 
 
 
@@ -19,25 +19,25 @@ if(empty($_POST['flag'])){
 }
 
 
-$set_p 					= $_POST['set'];
-$kiji_title_p			= $_POST['kiji_title'];
-$kiji_p					= $_POST['kiji'];
-$kiji_date_p			= $_POST['kiji_date'];
+$set_p 					= htmlspecialchars($_POST['set']);					//htmlspecialchars
+$kiji_title_p			= htmlspecialchars($_POST['kiji_title']);			//htmlspecialchars
+$kiji_p					= htmlspecialchars($_POST['kiji']);					//htmlspecialchars
+$kiji_date_p			= htmlspecialchars($_POST['kiji_date']);			//htmlspecialchars
 
 //カテゴリが選択式の時
 if($set_p==0){
-	$cate_no_p			= $_POST['cate_no'];
+	$cate_no_p			= htmlspecialchars($_POST['cate_no']);				//htmlspecialchars
 	
 	if(!(empty($_POST['cate_s_name']))){
-		$cate_s_name_p =$_POST['cate_s_name'];
+		$cate_s_name_p =htmlspecialchars($_POST['cate_s_name']);			//htmlspecialchars
 		
 	
 	}elseif(!(empty($_POST['cate_s_no']))){
-		$cate_s_no_p	=$_POST['cate_s_no'];
+		$cate_s_no_p	=htmlspecialchars($_POST['cate_s_no']);				//htmlspecialchars
 	}
 	
 }elseif($set_p==1){
-	$cate_name_p		=$_POST['cate_name'];
+	$cate_name_p		=htmlspecialchars($_POST['cate_name']);				//htmlspecialchars
 	
 	if(!empty($_POST['cate_s_name'])){
 		$cate_s_name_p	=$_POST['cate_s_name'];
@@ -69,6 +69,20 @@ kiji						kiji
 初めに記事テーブルを入力する
 そのあとカテゴリ入力する
 ******************************************************************/
+
+//▼ADD20141105
+//重複記事の排除
+$q_cho ="";
+$q_cho ="select kiji, kiji_title, kiji_date from kiji ";
+$q_cho.=" where kiji = \"$kiji_p\" ";
+$q_cho.=" where kiji_title = \"$kiji_title_p\" ";
+$q_cho.=" where kiji_date = \"$kiji_date_p\" ";
+$q_cho.=" limit 1 ";
+
+if(queryexist($q_cho)){
+	exit("おんなじ記事があるよ");
+}
+
 
 //記事を入力する
 //SQLの発行
@@ -284,6 +298,9 @@ if($cate_connect_success == FALSE){
 
 
 echo "<a href=\"index.html\">topへ戻る</a>";
+
+//セッションを終了する
+session_unset();
 	
 
 ?>

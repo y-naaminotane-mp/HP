@@ -43,45 +43,34 @@
 
 
 <!--ループを開始！！！！！-->
-{if $kiji_count ==1}
-<div class="kiji_wrap">
-	<h1>{$kiji_title|truncate:20}</h1>
-	<h5>{$kiji_date|date_format:"%Y年%m月%d日"}</h5>
-	<article>
-	<p>{$kiji|truncate:50}</p>
-    <p class="morepage"><a href="article.html?kiji_num={$kijinumber}">続きを見る</a><p>
-    <h5>カテゴリ:{$cate_name}　{if $cate_s_name neq NULL}:{$cate_s_name} {/if}</h5>
-	</article>
-</div >
 
-{elseif $kiji_count <6}
-{section name="var" loop=$kiji_count}
+	{if !is_array($kiji_date) }
+		<div class="kiji_wrap">
+			<h1>{$kiji_title|truncate:20}</h1>
+			<h5>{$kiji_date|date_format:"%Y年%m月%d日"}</h5>
+			<article>
+			<p>{$kiji|truncate:150}</p>
+		    <p class="morepage"><a href="{$kijinumber}">続きを見る</a><p>
+		    <h5>カテゴリ:{$cate_name}　{if !empty($cate_s_name) } : {$cate_s_name} {/if}</h5>
+			</article>
+		</div >
+	{elseif count($kiji_num) >1}
 
-<div class="kiji_wrap">
-	<h1>{$kiji_title[var]|truncate:20}</h1>
-	<h5>{$kiji_date[var]|date_format:"%Y年%m月%d日"}</h5>
-	<article>
-	<p>{$kiji[var]|truncate:50}</p>
-    <p class="morepage"><a href="article.html?kiji_num={$kijinumber[var]}">続きを見る</a><p>
-    <h5>カテゴリ:{$cate_name[var]}　{if $cate_s_name neq NULL}:{$cate_s_name[var]} {/if}</h5>
-	</article>
-</div >
-{/section}
-
-{elseif count($kiji_num) >=6}
-
-{section name="var" loop=6}
-<div class="kiji_wrap">
-	<h1>{$kiji_title[var]|truncate:20}</h1>
-	<h5>{$kiji_date[var]|date_format:"%Y年%m月%d日"}</h5>
-	<article>
-	<p>{$kiji[var]|truncate:50}</p>
-    <p class="morepage"><a href="article.html?kiji_num={$kijinumber[var]}">続きを見る</a><p>
-    <h5>カテゴリ:{$cate_name[var]}　{if $cate_s_name neq NULL}:{$cate_s_name[var]} {/if}</h5>
-	</article>
-</div >
-
-{/section}
+	{for $var=0 to 5}
+        {if $var>count($kiji_num)-1}
+   			{break}
+		{/if}
+	<div class="kiji_wrap">
+			<h1>{$kiji_title[$var]|truncate:20}</h1>
+			<h5>{$kiji_date[$var]|date_format:"%Y年%m月%d日"}</h5>
+		<article>
+		  <p>{$kiji[$var]|truncate:150}</p>
+	      <p class="morepage"><a href="{$kijinumber[$var]}">続きを見る</a><p>
+	      <h5>カテゴリ:{$cate_name[$var]}　{if !empty($cate_s_name) } : {$cate_s_name[$var]} {/if}</h5>
+		    <hr>
+	    </article>
+	  </div >
+	{/for}
 
 
 
@@ -95,7 +84,45 @@
 
 
 
-
+<!--ここからページ送り-->    
+    
+    <!--ページ数-->
+    {*ループについて*}
+    {*ゲット変数-2が1以下ならその右側全部を表示、ゲット変数以外にリンクつける*}
+    {*ゲット変数+2がトータルページ数以上の場合は右側全部を表示する*}
+    
+    
+    
+    
+	{if empty($smarty.get.page) || $smarty.get.page==1}
+    	1
+        	{for $var=2 to $total_page}
+        		<a href="?page={$var}">{$var}</a>
+                	{if $var==6}
+                    	{break}
+                    {/if}
+			{/for}
+	{elseif !empty($smarty.get.page) || $smarty.get.page!=1}
+    	{for $var=$smarty.get.page-6 to $smarty.get.page}
+        	{if $var<1}
+            	{continue}
+            {/if}
+            {if $var==$smarty.get.page}
+            	{$smarty.get.page}
+            {else}
+	            <a href="?page={$var}">{$var}</a>
+            {/if}
+        {/for}
+        {for $var=$smarty.get.page to $smarty.get.page+6}
+        	   	{if $var==$total_page}
+                	{break}
+                {/if}
+        	<a href="?page={$var}">{$var}</a>
+        {/for}
+    {/if}
+        	 
+    
+<!--ページ送り終了-->
 
 <!------------------------------------------------------------------------------------------------------
 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓

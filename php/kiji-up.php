@@ -84,7 +84,7 @@ include "./func/dbh.php";
 if(isset($_POST['set'])){
 	//セッションを初期化してポスト情報を入力
 	$set_p = "";
-	$set_p = $_POST['set'];
+	$set_p = htmlspecialchars($_POST['set']);													//htmlspecialchars
 	$_SESSION['set'] ="";
 }
 
@@ -147,20 +147,29 @@ if(@$set_p=="0"){
 	
 	if(isset($_POST['cate_no'])){
 		$cate_no_p ="";
-		$cate_no_p = $_POST['cate_no'];
+		$cate_no_p = htmlspecialchars($_POST['cate_no']);																				//htmlspecialchars
 		$_SESSION['cate_no'] = "";
 	}
 	
 	$a = "";
 	$a = count($cate_no);
+	
+	if($a>1){
 	//セッション情報を読んで選択されていたものがあればそれが選ばれている
-	for($i=0; $i<$a; $i++){
-		if(@$cate_no_p == $cate_no[$i]){
-			$daicate.="<option value=\"$cate_no[$i]\" selected>$cate_name[$i]</option>";
-   		}else{
-			$daicate.="<option value=\"$cate_no[$i]\">$cate_name[$i]</option>";
+		for($i=0; $i<$a; $i++){
+			if(@$cate_no_p == $cate_no[$i]){
+				$daicate.="<option value=\"$cate_no[$i]\" selected>$cate_name[$i]</option>";
+   			}else{
+				$daicate.="<option value=\"$cate_no[$i]\">$cate_name[$i]</option>";
+			}
+	
 		}
-
+	}elseif(!is_array($cate_no)){
+		if($cate_no_p == $cate_no || $_POST['cate_no'] == $cate_no){
+			$daicate = "<option value=\"$cate_no\" selected>$cate_name</option>";
+		}else{
+			$daicate = "<option value=\"$cate_no\" >$cate_name</option>";
+		}
 	}
 /***************************大カテゴリ選択**********************************/
 echo <<<cate_select
@@ -200,7 +209,7 @@ cate_select;
 	
 		if((isset($_POST['cate_s_no'])) || (isset($cate_no_p))){
 			$cate_s_no_p ="";
-			$cate_s_no_p = $_POST['cate_s_no'];
+			$cate_s_no_p = htmlspecialchars($_POST['cate_s_no']);												//htmlspecialchars
 			$_SESSION['cate_s_no'] = "";
 		}
 		
@@ -208,7 +217,7 @@ cate_select;
 		//カテゴリ小の入力用データの挿入
 		if((isset($_POST['cate_s_name'])) ||(isset($cate_s_name_p))){
 			$cate_s_name_p ="";
-			$cate_s_name_p =$_POST['cate_s_name'];
+			$cate_s_name_p =htmlspecialchars($_POST['cate_s_name']);											//htmlspecialchars
 			$_SESSION['cate_s_name'];
 		}
 		
@@ -277,12 +286,14 @@ cate_select_s;
 //カテゴリ大のテキスト確認
 	if((isset($_POST['cate_name'])) || (isset($cate_name_p))){
 		$cate_name_p ="";
-		$cate_name_p = $_POST['cate_name'];
+		$cate_name_p = htmlspecialchars($_POST['cate_name']);									//htmlspecialchars
+		$_SESSION['cate_name'] ="";
 	}
 //カテゴリ小のテキスト確認
 	if((isset($_POST['cate_s_name'])) || (isset($cate_s_name_p))){
 		$cate_s_name_p ="";
-		$cate_s_name_p = $_POST['cate_s_name'];
+		$cate_s_name_p = htmlspecialchars($_POST['cate_s_name']);								//htmlspecialchars
+		$_SESSION['cate_s_name'] = "";
 	}
 	
 /****************************カテゴリ入力****************************************/
@@ -307,7 +318,7 @@ textarea;
 //タイトルのテキスト確認
 	if((isset($_POST['kiji_title'])) || (isset($kiji_title_p))){
 		$kiji_title_p ="";
-		$kiji_title_p = $_POST['kiji_title'];
+		$kiji_title_p = htmlspecialchars($_POST['kiji_title']);												//htmlspecialchars
 		$_SESSION['kiji_title'] = "";
 	}
 	
@@ -316,14 +327,14 @@ textarea;
 //記事のテキスト確認
 	if((isset($_POST['kiji'])) || (isset($kiji_p))){
 		$kiji_p ="";
-		$kiji_p = $_POST['kiji'];
+		$kiji_p = htmlspecialchars($_POST['kiji']);															//htmlspecialchars
 		$_SESSION['kiji'] = "";
 	}
 
 //記事の日時確認
 	if((isset($_POST['kiji_date'])) || (isset($kiji_date_p))){
 		$kiji_date_p ="";
-		$kiji_date_p = $_POST['kiji_date'];
+		$kiji_date_p = htmlspecialchars($_POST['kiji_date']);												//htmlspecialchars
 		$_SESSION['kiji_date'] = "";
 	}
 

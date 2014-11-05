@@ -27,7 +27,6 @@ $smarty_c -> compile_dir ="../templates_c/";
  *mp	20141102		取得できなかった時のSQLを表示する
  *
  *
- *
 ***********************************************/
 function queryarray($a){
 	//グローバル変数pdoを呼び出してクエリーを実行して結果を取得する
@@ -35,39 +34,67 @@ function queryarray($a){
 	//アクセスに失敗した場合
 		if(!$stmt){
 			//ADD 20141102
-			echo"$a";
+			echo"$a <br>";
 			die("データの取得に失敗しました。");
 		}
 	$row = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 	
+	
 	//実行したクエリーをカラム名を変数名にして結果を配列として格納
-		foreach($row as $rows){
+			foreach($row as $rows){
 	//配列の数の判定
-			if(($a=count($row)) != 1){							//20141028　配列内にいくつ格納されているかの判定
-				foreach($rows as $key2=>$val2){
+				if(($a=count($row)) != 1){							//20141028　配列内にいくつ格納されているかの判定
+					foreach($rows as $key2=>$val2){
 					
 	//グローバル変数をここで宣言する
-					global ${$key2};
-					${$key2}[] = $val2;
-				}
-			}else{												//20141028 配列が一つだけなら変数として格納する
-				foreach($rows as $key2=>$val2){
-					global ${$key2};
-					${$key2} = $val2;
+						global ${$key2};
+						${$key2}[] = $val2;
+					}
+				}else{												//20141028 配列が一つだけなら変数として格納する
+					foreach($rows as $key2=>$val2){
+						global ${$key2};
+						${$key2} = $val2;
+					}
 				}
 			}
-		}
 	
 	//リターンをして処理の終了
-	return ${$key2} ;
+		return ${$key2} ;
+		
+
+
 }
+
 /***********************************************
  ***********************************************/
 
+/******************************************************
+*関数定義
+*queryexist
+*返り値　TRUE or FALSE
+*クエリを作成して値があるかどうかを判定する
+*
+*	mp	20141104	作成
 
 
+******************************************************/
 
+function queryexist($a){
+	//グローバル変数pdoを呼び出してクエリーを実行して結果を取得する
+	$stmt = $GLOBALS["dbh"]->query("$a");
+	//アクセスに失敗した場合
+		if(!$stmt){
+			//ADD 20141102
+			echo"$a <br>";
+			die("データの取得に失敗しました。");
+		}
+	$row = $stmt -> rowCount();
 
-
+		if($row > 0){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+}
 
 ?>

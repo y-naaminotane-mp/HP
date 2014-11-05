@@ -4,10 +4,21 @@
 
 	mp	20141026	トップ画面作成
 	mp	20141102	カテゴリ項目の追加
-
+	mp	20141103	トップに表示する変数の変更
 
 
 ***************************************************/
+
+	if(empty($_GET['page']) || $_GET['page']==1){
+		$page_g = 0;
+        
+	}else{
+    	$page_g = ($_GET['page']-1)*6;
+        
+    }
+
+
+
 
 /*smartyの呼び出し、smarty呼び出しの関数名は「$smarty_c」*/
 include "./func/func.php";
@@ -64,14 +75,16 @@ $q = "";								//クエリーの初期化
 $q ="select kiji.kiji_num, kiji.kiji_title, kiji.kiji, kiji.kiji_date ,category.cate_name, category_s.cate_s_name from kiji "; 
 $q.="left join cate_connect on kiji.kiji_num = cate_connect.kiji_num ";
 $q.="left join category on cate_connect.cate_no = category.cate_no ";
-$q.="left join category_s on category.cate_no = category_s.cate_no ";
-$q.="order by kiji.kiji_num desc";
+$q.="left join category_s on cate_connect.cate_s_no = category_s.cate_s_no ";
+$q.="order by kiji.kiji_num desc limit 6";
+
+$q.=" offset $page_g ";
 
 
 
 //カラム名に当てはめた配列に格納（function）
 
-$test = queryarray($q);
+queryarray($q);
 
 
 /**************************************************
@@ -96,27 +109,48 @@ urlencodeする対象⇒「kiji_num=」の下部分
 
 **************************************************/
 
-for($i=0; $i<count($kiji_num); $i++){
-	//まず$aを初期化する
-	$a = null;
-	
-	//リンクの下部分をまとめる
 
-	$a =$kiji_num[$i];
+if(is_array($kiji_num)){								//ADD 20141103	記事が配列なら
+	for($i=0; $i<count($kiji_num); $i++){
+		//まず$aを初期化する
+		$a = null;
 	
-	//次にhtmlspecialcharsしてからurlencodeして配列に格納
-	$kijinumber[] = urlencode($a);
+		//リンクの下部分をまとめる
+
+		$a ="article.html?kiji_num=".$kiji_num[$i];
+		
+		//次にhtmlspecialcharsしてからurlencodeして配列に格納
+		$kijinumber[] = $a;
+        
+        $kiji_count = count($kiji_num);
+	}
+    //▼ADD 20141103
+}else{
+	$a =null;
+    
+    $kijinumber = "article.html?kiji_num=".$kiji_num;
+
+    $kiji_count = "1";
 }
 
-
+	//▲ADD 20141103
+    
 $kiji_count = count($kiji_num);
 
+//▼ADD20141105 全ページの取得
+$q1 = "";
+$q1 = "select count(kiji_num) as kiji_counting from kiji";
+
+queryarray($q1);
+
+$total_page = ceil($kiji_counting/6);
 
 
 $smarty_c -> assign("kiji_title",$kiji_title);		//記事のタイトル
 $smarty_c -> assign("kiji_date",$kiji_date);		//記事の日時
-$smarty_c -> assign("kiji",$kiji);			//記事内容
+$smarty_c -> assign("kiji",$kiji);					//記事内容
 $smarty_c -> assign("kijinumber",$kijinumber);		//記事の続きのURL
+$smarty_c -> assign("kiji_num",$kiji_num);			//記事のナンバー
 
 //ADD 20141102
 $smarty_c -> assign("cate_name",$cate_name);		//カテゴリタグの追加
@@ -124,10 +158,11 @@ $smarty_c -> assign("cate_s_name", $cate_s_name);	//カテゴリ小タグの追�
 
 //ADD 20141102	
 $smarty_c -> assign("kiji_count",$kiji_count);		//記事の数を追加
+//ADD 20141104
+$smarty_c -> assign("total_page",$total_page);		//ページの確認
 
-$smarty_c -> display("../tpl/top.tpl");			//記事をテンプレートへ！！！！
 
-
+$smarty_c -> display("../tpl/top.tpl");				//記事をテンプレートへ！！！！
 
 //データベース切断
 $dbh = null;

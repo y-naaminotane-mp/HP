@@ -3,7 +3,7 @@
 プレビュー画面
 
 	mp	20141028	投稿画面作成
-
+	mp	20141103	カテゴリの重複排除
 
 
 
@@ -12,46 +12,45 @@
 session_start();
 
 
-
-
+$flag =0;
 //前の画面からきているかを確認する
 if(isset($_POST['flag'])){
 	//セッションにポスト情報を入れる
-	@$_SESSION['set'] 			= trim($_POST['set']);
-	@$_SESSION['kiji_title_s']	= trim($_POST['kiji_title']);
-	@$_SESSION['kiji_date']		= trim($_POST['kiji_date']);
-	@$_SESSION['kiji']			= $_POST['kiji'];
-	@$_SESSION['flag']			= trim($_POST['flag']);
-	@$kiji_title_p				= trim($_POST['kiji_title' ]);
+	@$_SESSION['set'] 			= htmlspecialchars(trim($_POST['set']));							//htmlspecialchars
+	@$_SESSION['kiji_title_s']	= htmlspecialchars(trim($_POST['kiji_title']));						//htmlspecialchars
+	@$_SESSION['kiji_date']		= htmlspecialchars(trim($_POST['kiji_date']));						//htmlspecialchars
+	@$_SESSION['kiji']			= htmlspecialchars($_POST['kiji']);									//htmlspecialchars
+	@$_SESSION['flag']			= htmlspecialchars(trim($_POST['flag']));							//htmlspecialchars
+	@$kiji_title_p				= htmlspecialchars(trim($_POST['kiji_title' ]));					//htmlspecialchars
 	
 	/**********************************************************************************/
 	if(!strptime($_POST['kiji_date'], '%Y-%m-%d')){
 		$kiji_date_p			=date("Y-m-d");
 	}else{
-		@$kiji_date_p			= trim($_POST['kiji_date']);
+		@$kiji_date_p			= htmlspecialchars(trim($_POST['kiji_date']));						//htmlspecialchars
 	}
 	/*********************************************************************************/
 	
-	@$kiji_p					= $_POST['kiji'];			//記事はトリムしない
-	@$set_p						= trim($_POST['set']);
+	@$kiji_p					= htmlspecialchars($_POST['kiji']);			//記事はトリムしない	//htmlspecialchars
+	@$set_p						= htmlspecialchars(trim($_POST['set']));							//htmlspecialchars
 	
 	//カテゴリ選択式のとき
 	if($_POST['set'] =='0'){
 		if(!isset($_POST['cate_no'])){
 			exit("カテゴリが選択されてないよ");
 		}else{
-		@$_SESSION['cate_no'] 		= $_POST['cate_no'];
-		@$cate_no_p 				= $_POST['cate_no'];
+		@$_SESSION['cate_no'] 		= htmlspecialchars($_POST['cate_no']);							//htmlspecialchars
+		@$cate_no_p 				= htmlspecialchars($_POST['cate_no']);							//htmlspecialchars
 	}
 	
 		//カテゴリ選択式の時で小カテゴリが入力されているときは小カテゴリも格納
 		if(isset($_POST['cate_s_name'])){
-			@$_SESSION['cate_s_name']	= $_POST['cate_s_name'];
-			@$cate_s_name_p				= $_POST['cate_s_name'];
+			@$_SESSION['cate_s_name']	= htmlspecialchars($_POST['cate_s_name']);					//htmlspecialchars
+			@$cate_s_name_p				= htmlspecialchars($_POST['cate_s_name']);
 			
 		}elseif(isset($_POST['cate_s_no'])){
-			@$_SESSION['cate_s_no']	= $_POST['cate_s_no'];
-			@$cate_s_name_p				= $_POST['cate_s_name'];
+			@$_SESSION['cate_s_no']	= htmlspecialchars($_POST['cate_s_no']);
+			@$cate_s_name_p				= htmlspecialchars($_POST['cate_s_name']);					//htmlspecialchars
 		}
 		
 		
@@ -60,17 +59,19 @@ if(isset($_POST['flag'])){
 		if(empty($_POST['cate_name'])){
 			exit("カテゴリが入力されてないよ");
 		}else{
-		@$cate_name_p				= trim($_POST['cate_name']);
-		@$_SESSION['cate_name']		= trim($_POST['cate_name']);
+		@$cate_name_p				= htmlspecialchars(trim($_POST['cate_name']));					//htmlspecialchars
+		@$_SESSION['cate_name']		= htmlspecialchars(trim($_POST['cate_name']));					//htmlspecialchars
 		}
 		if(!empty($_POST['cate_s_name'])){
-			@$_SESSION['cate_s_name']	= trim($_POST['cate_s_name']);
-			@$cate_s_name_p				= trim($_POST['cate_s_name']);
+			@$_SESSION['cate_s_name']	= htmlspecialchars(trim($_POST['cate_s_name']));			//htmlspecialchars
+			@$cate_s_name_p				= htmlspecialchars(trim($_POST['cate_s_name']));			//htmlspecialchars
 		}
 	}
 
 }else{
-	exit("情報がセットされていません");
+	echo"情報がセットされていません";
+	
+	$flag = 1;
 }
 
 
@@ -94,6 +95,69 @@ include "./func/dbh.php";
 ***************************************************/
 
 
+/***************************************************
+ADD 20141103
+カテゴリがすでに登録されているときは排除して前に戻すようにする
+▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+***************************************************/
+
+//カテゴリ大の時の処理
+	if(isset($_POST['cate_name']) || (isset($cate_name_p))){
+
+		$q_sel ="";
+		$q_sel =" select cate_no from category ";
+
+			if(isset($cate_name_p)){
+				$q_sel.=" where cate_name = \"$cate_name_p\" ";
+			}elseif(isset($_POST['cate_name'])){
+				$q_sel.=" where cate_name = " .htmlspecialchars($_POST['cate_name']) ;					//htmlspecialchars
+			}
+
+		$q_sel.=" limit 1";
+
+		$cate_ex = queryexist($q_sel);
+
+	
+			if($cate_ex == TRUE){
+		
+				echo "この大カテゴリは既に登録済み";
+				$flag = 1;
+			}
+
+	}
+
+//カテゴリ小のとき
+	if(isset($_POST['cate_s_name']) || (isset($cate_s_name_p))){
+
+		$q_s_sel ="";
+		$q_s_sel =" select cate_no from category_s ";
+
+			if(isset($cate_s_name)){
+				$q_s_sel.=" where cate_s_name = \"$cate_s_name\" ";
+			}elseif(isset($_POST['cate_s_name'])){
+				$q_s_sel.=" where cate_s_name = ".'"'.htmlspecialchars($_POST['cate_s_name']).'"';		//htmlspecialchars
+			}
+
+		$q_s_sel.=" limit 1";
+
+		$cate_s_ex = queryexist($q_s_sel);
+		
+	
+			if($cate_s_ex == TRUE){
+	
+				echo"この小カテゴリは既に登録済み";
+				$flag =1;
+			}
+
+	}
+
+/***************************************************
+▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+ADD 20141103
+ここまで
+****************************************************/
+
+
 
 
 
@@ -105,7 +169,7 @@ include "./func/dbh.php";
 
 カテゴリが選択式の場合
 ⇒カテゴリのナンバーでSQL検索して名前を取り出して入力
-
+	（ただし、小カテゴリが新たに入力された場合はそれを入力）
 ***************************************************/
 
 
@@ -151,6 +215,11 @@ if($set_p==0){
 	}
 
 }
+//エラーが出てたら終了する
+
+if($flag ==1){
+	exit;
+}
 
 //カテゴリ入力式、カテゴリ選択式関係なくカテゴリ名が挿入される
 
@@ -159,7 +228,7 @@ $smarty_c -> assign("kiji_date",$kiji_date_p);			//記事の日時
 $smarty_c -> assign("kiji",$kiji_p);					//記事内容
 $smarty_c -> assign("cate_name",$cate_name_p);			//カテゴリ名
 
-if(isset($cate_s_name_p)){
+if(!empty($cate_s_name_p)){
 	$smarty_c -> assign("cate_s_name",$cate_s_name_p);			//カテゴリ小名
 }
 
