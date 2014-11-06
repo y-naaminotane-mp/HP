@@ -89,11 +89,8 @@
     
     <!--ページ数-->
     {*ループについて*}
-    {*$_GETのページから右６個、左*}
+    {*$_GETのページから右６個、左6個*}
     {*ゲット変数+2がトータルページ数以上の場合は右側全部を表示する*}
-    
-    
-    
     
 	{if empty($smarty.get.page) || $smarty.get.page==1}
     	1
@@ -103,9 +100,17 @@
             	    	{if $var>6}
             	        	{break}
             	        {/if}
+                    {if $var==$total_page}
+                    	<a href="?page=2">next</a>
+                    {/if}
 				{/for}
+                
+                <a href="?page={$total_page}">last</a>
+                
             {/if}
 	{elseif !empty($smarty.get.page) || $smarty.get.page!=1}
+    	<a href="?page=1">top</a>
+    	<a href="?page={$smarty.get.page-1}">back</a>
     	{for $var=$smarty.get.page-6 to $smarty.get.page}
         	{if $var<1}
             	{continue}
@@ -122,7 +127,16 @@
     	            	{break}
     	            {/if}
     	    	<a href="?page={$var}">{$var}</a>
+                
+                	{if $var==$total_page && !empty($smarty.get.page)}
+                    	<a href="?page={$smarty.get.page+1}">next</a>
+                        
+                	{/if}
     		    {/for}
+                
+                	{if $smarty.get.page!=$total_page}
+                    	<a href="?page={$total_page}">last</a>
+                    {/if}
             {/if}
     {/if}
         	 
@@ -152,7 +166,10 @@
 
 <footer id="food">
 	<section>
-    <p>フッターの内容をここに書く</p>
+    
+    
+    
+    
 	</section>
 	<div id="copyright">
 		Copyright(C) MP All Right Reserved

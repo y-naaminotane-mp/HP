@@ -1,0 +1,81 @@
+<?php
+
+/***************************************************
+サイトマップの作成
+
+	mp	20141106	サイトマップ作成
+
+
+***************************************************/
+
+
+/*smartyの呼び出し、smarty呼び出しの関数名は「$smarty_c」*/
+include "./func/func.php";
+
+/*env呼び出し*/
+include "./env/env.inc";
+
+/*データベース呼び出し*/
+include "./func/dbh.php";
+
+
+//カテゴリナンバーとカテゴリ名をすべて取り出す
+
+/**************************************************
+
+カテゴリナンバーとカテゴリ名を抽出
+select cate_connect.cate_no, category.cate_name, count(cate_connect.cate_no) from cate_connect left join category on cate_connect.cate_no = category.cate_no group by cate_connect.cate_no;
+**************************************************/
+$q1 = "";
+$q1.= "select cate_connect.cate_no, category.cate_name, count(cate_connect.cate_no) as cate_count ";
+$q1.= " from cate_connect left join category on cate_connect.cate_no = category.cate_no ";
+$q1.= " group by cate_connect.cate_no ";
+
+
+//cate_no,cate_name,cate_countを取得
+queryarray($q1);
+
+/************************************************
+取得変数
+$cate_no,
+$cate_name,
+$cate_count
+
+************************************************/
+
+/************************************************
+カテゴリ小の情報
+select cate_connect.cate_no, cate_connect.cate_s_no, category_s.cate_s_name, count(*) as cate_s_counting from cate_connect left join category_s on cate_connect.cate_s_no = category_s.cate_s_no group by cate_connect.cate_s_no order by cate_connect.cate_no;
+*************************************************/
+
+$q3 = "";
+$q3 = " select cate_connect.cate_no as cate_no_s, cate_connect.cate_s_no, category_s.cate_s_name, count(*) as cate_s_count ";
+$q3.= " from cate_connect left join category_s on cate_connect.cate_s_no = category_s.cate_s_no ";
+$q3.= " where cate_connect.cate_s_no is not null group by cate_connect.cate_s_no order by cate_connect.cate_no ";
+
+//cate_no_s(category_sのカテナンバー)、小カテNO、小カテ名前、小カテのカウント
+queryarray($q3);
+/************************************************
+取得変数
+$cate_no_s,
+$cate_s_no,
+$cate_s_name,
+$cate_s_count
+************************************************/
+
+//カテゴリの種類
+$smarty_c -> assign("cate_no",$cate_no);			//カテゴリナンバー
+$smarty_c -> assign("cate_name",$cate_name);		//カテゴリ名
+$smarty_c -> assign("cate_count",$cate_count);		//カテゴリの数
+//$smarty_c -> assign("cate_all",$cate_all);			//大カテゴリの数
+
+//小カテゴリの種類
+$smarty_c -> assign("cate_no_s",$cate_no_s);		//小カテゴリに登録されているカテゴリナンバー
+$smarty_c -> assign("cate_s_no",$cate_s_no);		//小カテゴリナンバー
+$smarty_c -> assign("cate_s_name",$cate_s_name);	//小カテゴリ名
+$smarty_c -> assign("cate_s_count",$cate_s_count);	//カテゴリナンバー
+
+$smarty_c -> display("../tpl/sitemap.tpl");				//記事をテンプレートへ！！！！
+
+
+?>

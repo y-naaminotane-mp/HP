@@ -6,7 +6,6 @@
 	mp	20141103	カテゴリの重複排除
 
 
-
 ***************************************************/
 //セッションの開始
 session_start();
@@ -127,7 +126,7 @@ ADD 20141103
 	}
 
 //カテゴリ小のとき
-	if(isset($_POST['cate_s_name']) || (!empty($cate_s_name_p))){
+	if(!empty($_POST['cate_s_name']) || (!empty($cate_s_name_p))){
 
 		$q_s_sel ="";
 		$q_s_sel =" select cate_no from category_s ";
@@ -144,7 +143,7 @@ ADD 20141103
 		$cate_s_ex = queryexist($q_s_sel);
 		
 	
-			if($cate_s_ex == TRUE){
+			if(!empty($cate_s_name_p) || $cate_s_ex == TRUE){
 	
 				echo"この小カテゴリは既に登録済み";
 				$flag =1;
@@ -157,6 +156,7 @@ ADD 20141103
 ADD 20141103
 ここまで
 ****************************************************/
+
 
 
 
