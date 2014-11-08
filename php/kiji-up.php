@@ -388,7 +388,7 @@ if($set_p == "0"){
 	//大カテゴリ選択
 	$hidden.="<input type=\"hidden\" name=\"cate_no\" value=\"$cate_no_p\">";
 	//小カテゴリ選択
-		if(!empty($cate_s_name_p)){
+		if(isset($cate_s_name_p)){
 			$hidden.="<input type=\"hidden\" name=\"cate_s_name\" value=\"$cate_s_name_p\">";
 	//小カテゴリが入力されているとき
 		}elseif(!empty($cate_s_no_p)){

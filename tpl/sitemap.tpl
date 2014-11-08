@@ -54,14 +54,14 @@
 <h1>記事カテゴリ一覧</h1>
 {*カテゴリ大をすべて並べる*}
 {for $vara=0 to count($cate_no)-1}
- 	<p>{$cate_name[$vara]}({$cate_count[$vara]})</p>
+ 	<p><a href="./category.html?cate_no={$cate_no[$vara]}">{$cate_name[$vara]}({$cate_count[$vara]})</a></p>
 	<ol>
 {*小カテのカテゴリ大のナンバーを確認して今のカテゴリナンバーと同じなら並べる*}
 	{for $varb=0 to count($cate_no_s)-1}
     	{if empty($cate_s_name)}
         	{continue}
         {elseif $cate_no[$vara]==$cate_no_s[$varb] && $cate_s_name!=NULL}
-				<li>{$cate_s_name[$varb]}({$cate_s_count[$varb]})</li>
+				<li><a href="./category.html?cate_s_no={$cate_s_no[$varb]}">{$cate_s_name[$varb]}({$cate_s_count[$varb]})</a></li>
         
         {/if}
     {/for}

@@ -43,13 +43,13 @@ if(isset($_POST['flag'])){
 	}
 	
 		//カテゴリ選択式の時で小カテゴリが入力されているときは小カテゴリも格納
-		if(isset($_POST['cate_s_name'])){
+		if(!empty($_POST['cate_s_name'])){
 			@$_SESSION['cate_s_name']	= htmlspecialchars($_POST['cate_s_name']);					//htmlspecialchars
 			@$cate_s_name_p				= htmlspecialchars($_POST['cate_s_name']);
 			
-		}elseif(isset($_POST['cate_s_no'])){
+		}elseif(!empty($_POST['cate_s_no'])){
 			@$_SESSION['cate_s_no']	= htmlspecialchars($_POST['cate_s_no']);
-			@$cate_s_name_p				= htmlspecialchars($_POST['cate_s_name']);					//htmlspecialchars
+			@$cate_s_no_p				= htmlspecialchars($_POST['cate_s_no']);					//htmlspecialchars
 		}
 		
 		
@@ -222,6 +222,9 @@ if($flag ==1){
 	exit;
 }
 
+
+
+
 //カテゴリ入力式、カテゴリ選択式関係なくカテゴリ名が挿入される
 
 $smarty_c -> assign("kiji_title",$kiji_title_p);		//記事のタイトル
@@ -249,11 +252,11 @@ $hiddens.="<input type=\"hidden\" name=\"kiji_date\" value=\"$kiji_date_p\">";
 //情報で選択式が選ばれたとき
 if($set_p == 0){
 	$hiddens.="<input type=\"hidden\" name=\"cate_no\" value=\"$cate_no_p\">";
-	if(!empty($cate_s_name_p)){
+	if(!empty($_POST['cate_s_name'])){
 		
 		$hiddens.="<input type=\"hidden\" name=\"cate_s_name\" value=\"$cate_s_name_p\">";
 		
-	}elseif(!empty($cate_s_no_p)){
+	}elseif(!empty($_POST['cate_s_no'])){
 		$hiddens.="<input type=\"hidden\" name=\"cate_s_no\" value=\"$cate_s_no_p\">";
 	}
 

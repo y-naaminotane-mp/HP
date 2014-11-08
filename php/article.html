@@ -6,7 +6,7 @@
 
 	mp	20141028	記事画面作成
 	mp	20141102	カテゴリの取得
-
+	mp	20141108	カテゴリナンバーの追加
 
 
 ***************************************************/
@@ -15,7 +15,7 @@
 include "./func/func.php";
 
 /*env呼び出し*/
-include "./env/env.inc";
+include "./env/selenv.inc";
 
 /*データベース呼び出し*/
 include "./func/dbh.php";
@@ -55,7 +55,7 @@ $q = "";
 
 
 
-$q =" select kiji.kiji_num, kiji.kiji_title, kiji.kiji, kiji.kiji_date ,category.cate_name, category_s.cate_s_name from kiji "; 
+$q =" select kiji.kiji_num, kiji.kiji_title, kiji.kiji, kiji.kiji_date ,category.cate_name, category_s.cate_s_name, category.cate_no, category_s.cate_s_no from kiji "; 	//ADD 20141108	カテゴリナンバー追加
 $q.=" left join cate_connect on kiji.kiji_num = cate_connect.kiji_num ";
 $q.=" left join category on cate_connect.cate_no = category.cate_no ";
 $q.=" left join category_s on cate_connect.cate_s_no = category_s.cate_s_no ";
@@ -91,6 +91,8 @@ $smarty_c -> assign("kiji_date",$kiji_date);		//記事の日時
 $smarty_c -> assign("kiji",$kiji);			//記事内容
 $smarty_c -> assign("cate_name",$cate_name);		//カテゴリの追加 ADD 20141102
 $smarty_c -> assign("cate_s_name", $cate_s_name);	//カテゴリ小の追加　ADD 20141102
+$smarty_c -> assign("cate_no", $cate_no);			//カテゴリナンバーの追加	ADD	20141108
+$smarty_c -> assign("cate_s_no", $cate_s_no);	//カテゴリ小ナンバー追加	ADD	20141108
 
 $smarty_c -> display("../tpl/art.tpl");			//記事をテンプレートへ！！！！
 

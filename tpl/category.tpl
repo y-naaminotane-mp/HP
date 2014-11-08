@@ -52,7 +52,7 @@
 			<p>{$kiji|truncate:150}</p>
 		    <p class="morepage"><a href="{$kijinumber}">続きを見る</a><p>
             <hr>
-		    <h5>カテゴリ:<a href="./category.html?cate_no={$cate_no}">{$cate_name}</a>　{if !empty($cate_s_name)}:<a href="./category.html?cate_no={$cate_s_no}">{$cate_s_name}</a> {/if}</h5>
+		    <h5>カテゴリ:<a href="./category.html?cate_no={$cate_no}">{$cate_name}</a>　{if !empty($cate_s_name)}:<a href="./category.html?cate_s_no={$cate_s_no}">{$cate_s_name}</a> {/if}</h5>
 			</article>
 		</div >
 	{elseif count($kiji_num) >1}
@@ -75,9 +75,6 @@
 	    </article>
 	  </div >
 	{/for}
-
-
-
 {/if}
 
 <!--ループ完了！！！！！！-->
@@ -95,25 +92,27 @@
     {*$_GETのページから右６個、左6個*}
     {*ゲット変数+2がトータルページ数以上の場合は右側全部を表示する*}
     
+    
+{if ($flag==0) && !empty($cate_no_g)}
 	{if empty($smarty.get.page) || $smarty.get.page==1}
     	1
         	{if $total_page>1}
         		{for $var=2 to $total_page}
-        			<a href="?page={$var}">{$var}</a>
+        			<a href="?page={$var}&cate_no={$cate_no_g}">{$var}</a>
             	    	{if $var>6}
             	        	{break}
             	        {/if}
                     {if $var==$total_page}
-                    	<a href="?page=2">next</a>
+                    	<a href="?page=2&cate_no={$cate_no_g}">next</a>
                     {/if}
 				{/for}
                 
-                <a href="?page={$total_page}">last</a>
+                <a href="?page={$total_page}&cate_no={$cate_no_g}">last</a>
                 
             {/if}
 	{elseif !empty($smarty.get.page) || $smarty.get.page!=1}
-    	<a href="?page=1">top</a>
-    	<a href="?page={$smarty.get.page-1}">back</a>
+    	<a href="?page=1&cate_no={$cate_no_g}">top</a>
+    	<a href="?page={$smarty.get.page-1}&cate_no={$cate_no_g}">back</a>
     	{for $var=$smarty.get.page-6 to $smarty.get.page}
         	{if $var<1}
             	{continue}
@@ -121,7 +120,7 @@
             {if $var==$smarty.get.page}
             	{$var}
             {else}
-	            <a href="?page={$var}">{$var}</a>
+	            <a href="?page={$var}&cate_no={$cate_no_g}">{$var}</a>
             {/if}
         {/for}
         	{if $smarty.get.page!=$total_page}
@@ -129,21 +128,69 @@
     	    	   	{if $var>$total_page}
     	            	{break}
     	            {/if}
-    	    	<a href="?page={$var}">{$var}</a>
+    	    	<a href="?page={$var}&cate_no={$cate_no_g}">{$var}</a>
                 
                 	{if $var==$total_page && !empty($smarty.get.page)}
-                    	<a href="?page={$smarty.get.page+1}">next</a>
+                    	<a href="?page={$smarty.get.page+1}&cate_no={$cate_no_g}">next</a>
                         
                 	{/if}
     		    {/for}
                 
                 	{if $smarty.get.page!=$total_page}
-                    	<a href="?page={$total_page}">last</a>
+                    	<a href="?page={$total_page}&cate_no={$cate_no_g}">last</a>
                     {/if}
             {/if}
     {/if}
         	 
-    
+{elseif ($flag==1) && !empty($cate_s_no)}
+	{if empty($smarty.get.page) || $smarty.get.page==1}
+    	1
+        	{if $total_page>1}
+        		{for $var=2 to $total_page}
+        			<a href="?page={$var}&cate_s_no={$cate_s_no_g}">{$var}</a>
+            	    	{if $var>6}
+            	        	{break}
+            	        {/if}
+                    {if $var==$total_page}
+                    	<a href="?page=2&cate_s_no={$cate_s_no_g}">next</a>
+                    {/if}
+				{/for}
+                
+                <a href="?page={$total_page}&cate_s_no={$cate_s_no_g}">last</a>
+                
+            {/if}
+	{elseif !empty($smarty.get.page) || $smarty.get.page!=1}
+    	<a href="?page=1&cate_no={$cate_s_no_g}">top</a>
+    	<a href="?page={$smarty.get.page-1}&cate_s_no={$cate_s_no_g}">back</a>
+    	{for $var=$smarty.get.page-6 to $smarty.get.page}
+        	{if $var<1}
+            	{continue}
+            {/if}
+            {if $var==$smarty.get.page}
+            	{$var}
+            {else}
+	            <a href="?page={$var}&cate_s_no={$cate_s_no_g}">{$var}</a>
+            {/if}
+        {/for}
+        	{if $smarty.get.page!=$total_page}
+		        {for $var=$smarty.get.page+1 to $smarty.get.page+6}
+    	    	   	{if $var>$total_page}
+    	            	{break}
+    	            {/if}
+    	    	<a href="?page={$var}&cate_s_no={$cate_s_no_g}">{$var}</a>
+                
+                	{if $var==$total_page && !empty($smarty.get.page)}
+                    	<a href="?page={$smarty.get.page+1}&cate_s_no={$cate_s_no_g}">next</a>
+                        
+                	{/if}
+    		    {/for}
+                
+                	{if $smarty.get.page!=$total_page}
+                    	<a href="?page={$total_page}&cate_s_no={$cate_s_no_g}">last</a>
+                    {/if}
+            {/if}
+    {/if}
+{/if}
 <!--ページ送り終了-->
 
 <!------------------------------------------------------------------------------------------------------

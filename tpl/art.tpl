@@ -39,7 +39,7 @@
 <div class="art_wrap">
 	<h1>{$kiji_title}</h1>
 	<h5>{$kiji_date|date_format:"%Y年%m月%d日"}</h5>
-    <h5>カテゴリ：{$cate_name}	{if !empty($cate_s_name)}:{$cate_s_name} {/if}</h5>
+    <h5>カテゴリ：<a href="category.html?cate_no={$cate_no}">{$cate_name}</a>	{if !empty($cate_s_name)}:<a href="category.html?cate_s_no={$cate_s_no}">{$cate_s_name}</a> {/if}</h5>
 	<article>
 	<p><pre>{$kiji}</pre></p>
 	</article>

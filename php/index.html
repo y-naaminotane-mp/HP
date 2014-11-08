@@ -5,7 +5,7 @@
 	mp	20141026	トップ画面作成
 	mp	20141102	カテゴリ項目の追加
 	mp	20141103	トップに表示する変数の変更
-
+	mp	20141108	カテゴリナンバーの追加
 
 ***************************************************/
 
@@ -24,7 +24,7 @@
 include "./func/func.php";
 
 /*env呼び出し*/
-include "./env/env.inc";
+include "./env/selenv.inc";
 
 /*データベース呼び出し*/
 include "./func/dbh.php";
@@ -72,7 +72,7 @@ $q = "";								//クエリーの初期化
 
 ****************************************************/
 
-$q ="select kiji.kiji_num, kiji.kiji_title, kiji.kiji, kiji.kiji_date ,category.cate_name, category_s.cate_s_name from kiji "; 
+$q ="select kiji.kiji_num, kiji.kiji_title, kiji.kiji, kiji.kiji_date ,category.cate_name, category_s.cate_s_name, category.cate_no, category_s.cate_s_no from kiji "; 	//ADD 20141108
 $q.="left join cate_connect on kiji.kiji_num = cate_connect.kiji_num ";
 $q.="left join category on cate_connect.cate_no = category.cate_no ";
 $q.="left join category_s on cate_connect.cate_s_no = category_s.cate_s_no ";
@@ -155,6 +155,8 @@ $smarty_c -> assign("kiji_num",$kiji_num);			//記事のナンバー
 //ADD 20141102
 $smarty_c -> assign("cate_name",$cate_name);		//カテゴリタグの追加
 $smarty_c -> assign("cate_s_name", $cate_s_name);	//カテゴリ小タグの追加
+$smarty_c -> assign("cate_no",$cate_no);		//カテゴリタグの追加
+$smarty_c -> assign("cate_s_no", $cate_s_no);	//カテゴリ小タグの追加
 
 //ADD 20141102	
 $smarty_c -> assign("kiji_count",$kiji_count);		//記事の数を追加
