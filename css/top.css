@@ -21,18 +21,162 @@
 /*記事の続きを見るボタンのスタイル*/
 .morepage{
 	text-align			:center;							/*テキストは中心に*/
-	border-style		:solid;								/*ボタンの枠線の指定*/
 	border-radius		:10px;								/*ボタンを丸くする*/
 	box-shadow			: 3px 3px 5px 2px ;					/*ボタン周りの影*/
-	background-color	:#ffffff;							/*背景色*/
-	color				:#0f0f0f;							/*文字色*/
+	background-color	:#f0f0f0;							/*背景色*/
+
+}
+
+.morepage a{
+	display				:block;								/*続き部分をブロックに*/
+	color				:#0f0f0f;							/*リンクの文字色*/
+	background-color	:#A0A0A0;							/*リンクの背景色*/
+	border-radius		:10px;								/*リンクのボックス*/
+	font-family			:"ＭＳ ゴシック", "MS Gothic", "Osaka－等幅", Osaka-mono, monospace;	/*フォントファミリー*/
+	font-weight			:bold;								/*リンクの文字の太さ*/
+	text-decoration		:none;
+}
+
+.morepage:hover{
+	box-shadow			:0px 0px 0px 0px ;					/*ボタン周りの影*/
+	border-style		:solid;								/*ボタンの枠線の指定*/
+	border-width		:thin;								/*ボーダーの設定*/
+}
+
+.morepage a:hover{
+	background-color	:#FAFAFA;							/*マウスホバー時の背景色*/
+	color				:#B0B0B0;							/*マウスホバー時の文字色*/
+	font-weight			:nomal;								/*リンクの文字の太さ*/
+	text-decoration		:underline;
+}
+
+/***カテゴリ部分の変更***/
+.category_link p{
+	text-align			:left;	
+}
+
+.category_link a{
+	background-color	:#000000;							/*カテゴリの背景*/
+	color				:#f0f0f0;							/**/
+	display				:inline-block;
+	width				:auto;
+	height				:auto;
+	text-align			:center;
+	text-decoration		:none;
+	padding				:0 1% 0 1%;
+}
+
+.category_link a:hover{
+	background-color	:#A0A0A0;							/*カテゴリの背景*/
+	color				:#0A0A0A;							/**/
+	text-decoration		:underline;
+}
+
+
+
+.page ul{
+	text-align			:center;
+	padding				:1% 0;
+	margin				:0;
+}
+
+.page ul li{
+	display				:inline;
+	font-family			:"Lucida Console", Monaco, monospace;/*リンクの文字フォント*/
+	margin				:0;
+}
+
+.page ul li a{
+	display				:inline-block;
+	padding				:2%;
+	margin				:0;
+	border				:0;
+	background-color	:#7B9FFF;
+	color				:#FFDADA;
+	border				:none;
+	text-decoration		:none;
+}
+
+.page ul li a:hover{
+	background-color	:#94E9FB;
+	color				:#000ADA;
+}
+
+.c_page{
+	display				:inline-block;
+	background-color	:#C4C4C4;
+	color				:#7D7D7D;
+	padding				:2%;
+	margin				:0;
+
 }
 
 
 /************************
 	スマホ用スタイルシート
 *************************/
+	/*記事の続きを見るボタンのスタイル*/
+	.kiji_wrap h1{
+		font-size		:20px;								/*記事のタイトル*/
+
+	}
+
+	.kiji_wrap h4{
+		font-size		:12px;								/*日時*/
+		text-align		:right;								/*日時*/
+	}
 	
+	.kiji_wrap article span{
+		line-height		:1.5;								/*記事一部内容の行間*/
+		text-align		:left;
+		
+	}
+
+	.morepage{
+		font-size		:16px;								/*フォントサイズ*/
+		width			:80%;								/*続きを見るの広さ*/
+		height			:5%;								/*ボタンの高さ*/
+		margin			:0 auto 0 auto;						/*位置の調整*/
+		padding			:1% auto 1% auto					/**/	
+		vertical-align	:middle;
+	}
+
+	.morepage a{
+		height			:100%;
+		vertical-align	:middle;
+	}
+
+	.morepage:hover{
+
+	}
+
+	.morepage a:hover{
+
+	}
+	
+	.page{
+		padding				:0;
+		width				:100%;
+	}
+
+	.page ul{
+
+	}
+
+	.page ul li{
+
+	}
+
+	.page ul li a{
+
+		font-size			:11px;
+	}
+
+	.c_page{
+
+		font-size			:11px;
+
+	}
 
 /*********************************************
 スマホ用終わり
@@ -42,7 +186,7 @@
 以下タブレット用追加
 **********************************************/
 
-	@media only screen and (min-width:720px){
+	@media only screen and (min-width:600px){
 
 }
 
@@ -57,6 +201,6 @@
 以下大きい画面用追加
 
 **********************************************/
-@media only screen and (min-width:960px){
+@media screen and (min-width:960px){
 
 }

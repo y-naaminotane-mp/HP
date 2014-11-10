@@ -143,9 +143,10 @@ ADD 20141103
 		$cate_s_ex = queryexist($q_s_sel);
 		
 	
-			if(!empty($cate_s_name_p) || $cate_s_ex == TRUE){
+			if(!empty($cate_s_name_p) && $cate_s_ex == TRUE){
 	
 				echo"この小カテゴリは既に登録済み";
+				echo $q_s_sel;
 				$flag =1;
 			}
 

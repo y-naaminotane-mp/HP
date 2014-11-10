@@ -117,10 +117,10 @@ if(is_array($kiji_num)){								//ADD 20141103	記事が配列なら
 	
 		//リンクの下部分をまとめる
 
-		$a ="article.html?kiji_num=".$kiji_num[$i];
+		//$a ="article.html?kiji_num=".$kiji_num[$i];	//DEL 20141109	
 		
 		//次にhtmlspecialcharsしてからurlencodeして配列に格納
-		$kijinumber[] = $a;
+		//$kijinumber[] = $a;							//DEL 20141109
         
         $kiji_count = count($kiji_num);
 	}
@@ -146,10 +146,20 @@ queryarray($q1);
 $total_page = ceil($kiji_counting/6);
 
 
+/**************************************************
+
+フッター部分の挿入
+
+**************************************************/
+
+
+include "./cale_inc.php";
+
+
 $smarty_c -> assign("kiji_title",$kiji_title);		//記事のタイトル
 $smarty_c -> assign("kiji_date",$kiji_date);		//記事の日時
 $smarty_c -> assign("kiji",$kiji);					//記事内容
-$smarty_c -> assign("kijinumber",$kijinumber);		//記事の続きのURL
+//$smarty_c -> assign("kijinumber",$kijinumber);		//記事の続きのURL	//DEL　20141109
 $smarty_c -> assign("kiji_num",$kiji_num);			//記事のナンバー
 
 //ADD 20141102

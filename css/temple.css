@@ -61,6 +61,7 @@ body{
 	margin-top			:10px;								/*ヘッダーの上部分の空間*/
 	border				:10px dotted;						/*装飾*/
 	text-align			:center;							/*中央そろえ*/
+
 }
 
 /*ヘッダー文字装飾*/
@@ -77,18 +78,37 @@ body{
 
 /*リンクのスタイル*/
 #link{
-	text-align			:right;							/*中央揃え*/
 
+	padding				:1% 0 3% 0;
 }
-
+ 
 #link ul{
-	background-color	:#41FAF0;							/*リンク背景*/
+	background-color	:#3F1850;
+	margin				:1% 0 1% 0;								/*リンクの場所調整*/
+
 }
 
 #link ul li{
 	font-family			:"Lucida Console", Monaco, monospace;/*リンクの文字フォント*/
 	font-weight			:bolder;							/*フォントの大きさ*/
-	display				:inline;							/*リンクを横並びに*/	
+	display				:inline;							/*リンクを横並びに*/
+	margin				:0%;
+	padding				:0%;
+	margin				:0% auto 0% auto;
+}
+
+#link ul li a{
+	color				:#FFFBBB;
+	background-color	:#3F1850;
+	padding				:0%;
+	display				:inline-block;
+
+}
+
+#link ul li a:hover{
+	background-color	:#F0F0F0;
+	text-decoration		:underline;
+	color				:#3F1850;
 }
 
 /*メインコンテンツ*/
@@ -97,6 +117,7 @@ body{
 	color				:#0f0f0f;							/*コンテンツの色はちょっと変える*/
 /*	text-align			:center;							/*中央揃え*/
 	border-width		:0;									/*ボーダー部分の広さ*/
+	margin-top:1%;
 }
 /*コンテンツの題名*/
 #kiji h1{
@@ -134,12 +155,59 @@ body{
 }
 
 /*フッター部分*/
-#food{
-/*	text-align			:center;							/*中央揃え*/
+
+#food {
+	text-align:left;
+	margin-left:0;
+	margin-top:0;
+}
+
+
+#food ul{
+	display				:block;
+	padding				:0;
+
+}
+
+#food ul li{
+	display				:inline-block;
+	margin-left			:0;
+	padding				:0;
+	background-color	:#2f2f2f;
+	box-shadow			:0px 5px 2px #333, 0px 0px 3px #AFAFAF inset;
+}
+
+#food ul li a{
+	display				:block;
+	width				:100%;
+	text-align			:center;
+	text-decoration		:none;
+	color				:#d2d2d2;
+	padding				:3% 0 3% 0;
+}
+
+#food ul li:hover{
+	background-color	:#f2f2f2;
+	box-shadow			:0px 0px 0px #FFFFFF;
+	
+}
+
+#food ul li a{
+	display				:block;
+	width				:100%;
+	text-align			:center;
+	text-decoration		:none;
+	color				:#d2d2d2;
+	padding				:3% 0 3% 0;
+}
+
+#food ul li a:hover{
+	color				:#121212;
 }
 
 /*コピーライトの内容*/
 #copyright{
+	text-align			:center;
 	background-color	:#3B3B3B;							/*コピーライト背景*/
 	color				:#9FC6FF;							/*コピーライト文字色*/
 }
@@ -165,39 +233,44 @@ body{
 	
 /*リンク*/
 	#link{
-		font-size		:16px;								/*リンクのフォントサイズ*/
 	}
 
 	#link ul{
-		margin			:10px 0 0 0;								/*リンクの場所調整*/
-		padding			:0;									/*リンクの位置調整*/
+		padding				:1%;									/*リンクの位置調整*/
+		text-align			:center;
+
 	}
 
 	#link ul li{
-		width			:25%;								/*リンクの幅*/
-		padding			:0 5%;								/*リンクの幅を調整*/
+		padding				:0 5%;								/*リンクの幅を調整*/
+	}
+	
+	#link ul li a{
+		font-size			:12px;
+		padding				:2% 1% 2% 1%;
+		width				:auto;
 	}
 
 /*メインコンテンツ*/
 	#kiji{
-		padding			:0;								/*記事とリンクとの間の間隔*/
+		padding-top		:3%;								/*記事とリンクとの間の間隔*/
 		margin			:0;									/*記事との間隔*/
 	}
 	
 	/*コンテンツの題名*/
-	#kiji h1{
-		font-size		:17px;								/*コンテンツ題名のフォントサイズ*/
-	}
+/*	#kiji h1{
+		font-size		:20px;								/*コンテンツ題名のフォントサイズ*/
+/*	}
 	#kiji h3{
 		font-size:		:10px;								/*日時の文字サイズ*/
-	}
+/*	}
 	
 /*コンテンツ内容*/
-	#kiji article{
-		font-size		:18px;								/*コンテンツ記事のフォントサイズ*/
-		line-height		:1.5;								/*行間の幅*/
-		text-align		:left;								/*記事のテキストは左ぞろえに*/
-	}
+/*	#kiji article{
+		font-size		:14px;								/*コンテンツ記事のフォントサイズ*/
+/*		line-height		:1.5;								/*行間の幅*/
+/*		text-align		:left;								/*記事のテキストは左ぞろえに*/
+/*	}
 
 
 /*プロフィール*/
@@ -220,9 +293,18 @@ body{
 	#food{
 	}
 
+	#food ul li{
+		font-size			:auto;
+		width				:50%;
+	}
+	
+	#food ul li {
+	}
+
+
 /*コピーライト*/
 	#copyright{
-		font-size		:10px;
+		font-size		:14px;
 	}
 	
 	
@@ -241,7 +323,7 @@ body{
 **********************************************/
 
 
-	@media only screen and (min-width:720px){
+	@media only screen and (min-width:600px){
 	
 	#wrapper{
 		margin				:auto 3% auto 3%;							/*コンテンツ全体の調整　縦マージン：０　横マージン：オート*/
@@ -273,10 +355,10 @@ body{
 
 	}
 	
-	#kiji h1{
+/*	#kiji h1{
 		font-size		:28px;								/*コンテンツ題名のフォントサイズ*/
-	}
-	
+/*	}
+*/	
 	#profile p{
 		text-align		:left;
 	}
