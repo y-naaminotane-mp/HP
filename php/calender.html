@@ -1,9 +1,8 @@
 <?php
-
 /***************************************************
-カテゴリ表示画面
+月別画面
 
-	mp	20141108	カテゴリ画面
+	mp	20141111	月別画面
 
 
 
@@ -18,40 +17,15 @@ include "./env/selenv.inc";
 /*データベース呼び出し*/
 include "./func/dbh.php";
 
-
-
 /***************************************************
-サイトマップからGETした情報からクエリを作成する
-
-カテゴリ大がクリックされた場合⇒カテゴリ大のクエリが選択される(フラグ０)
-カテゴリ小がクリックされた場合⇒カテゴリ小のクエリが選択される（フラグ１）
-
-渡される変数の種類
-カテゴリ大のカテゴリナンバー
-カテゴリ小のカテゴリナンバー
-取得ページ
-	⇒取得データがない場合は一ページ目になる	
-
-ページ移りのゲットはカテゴリ種類のデータとページを渡す
-
+データの取得
+⇒GETを確認（なければトップに移動）
+⇒ゲット
 ***************************************************/
 
-//GETの確認をする
-
-if((isset($_GET['cate_no'])) && empty($_GET['cate_s_no'])){
-	$cate_no_g = "";
-	$cate_no_g = $_GET['cate_no'];
-	//フラグの設定
-	$flag = 0;
+if(empty($_GET['kiji_month'])){
 	
-}elseif((isset($_GET['cate_s_no'])) && empty($_GET['cate_no'])){
-	$cate_s_no_g = "";
-	$cate_s_no_g = $_GET['cate_s_no'];
-	//フラグの設定
-	$flag =1;
-}else{
-	//カテゴリナンバーが空ならトップに行く
-	header("Location:index.html");
+		header("Location:index.html");
 }
 
 //ページ数を取得する
@@ -65,33 +39,25 @@ if((empty($_GET['page'])) || $_GET['page'] == 1){
 }
 
 
-/******************************************************************
-クエリーの作成
-
-******************************************************************/
-$q ="select kiji.kiji_num, kiji.kiji_title, kiji.kiji, kiji.kiji_date ,category.cate_name, category.cate_no, category_s.cate_s_no, category_s.cate_s_name from kiji "; 
-$q.="left join cate_connect on kiji.kiji_num = cate_connect.kiji_num ";
-$q.="left join category on cate_connect.cate_no = category.cate_no ";
-$q.="left join category_s on cate_connect.cate_s_no = category_s.cate_s_no ";
 
 
-//フラグが大カテゴリの場合
-if($flag==0){
-	$q.=" where cate_connect.cate_no = $cate_no_g ";
-}elseif($flag==1){
-	$q.=" where cate_connect.cate_s_no = $cate_s_no_g  ";
-}
 
 
+$kiji_month_g = "";
+$kiji_month_g = $_GET['kiji_month'];
+
+$q = "";
+$q =" select kiji.kiji_num, kiji.kiji_title, kiji.kiji, kiji.kiji_date ,category.cate_name, category.cate_no, category_s.cate_s_no, category_s.cate_s_name from kiji "; 
+$q.=" left join cate_connect on kiji.kiji_num = cate_connect.kiji_num ";
+$q.=" left join category on cate_connect.cate_no = category.cate_no ";
+$q.=" left join category_s on cate_connect.cate_s_no = category_s.cate_s_no ";
+
+$q.=" where date_format(kiji_date, '%Y-%m') = \"$kiji_month_g\" ";
 $q.="order by kiji.kiji_num desc limit 6";
-
 $q.=" offset $page_g ";
 
-
-
-//カラム名に当てはめた配列に格納（function）
-
 queryarray($q);
+
 
 
 /**************************************************
@@ -121,39 +87,22 @@ if(is_array($kiji_num)){
 	for($i=0; $i<count($kiji_num); $i++){
 		//まず$aを初期化する
 		$a = null;
-	
-		//リンクの下部分をまとめる
-
-		$a ="article.html?kiji_num=".$kiji_num[$i];
-		
-		//次にhtmlspecialcharsしてからurlencodeして配列に格納
-		$kijinumber[] = $a;
         
         $kiji_count = count($kiji_num);
 	}
 
 }else{
 	$a =null;
-    
-    $kijinumber = "article.html?kiji_num=".$kiji_num;
 
     $kiji_count = "1";
 }
 
-    
-$kiji_count = count($kiji_num);
 
 //カテゴリのページ数
 $q1 = "";
-$q1 = "select count(kiji_num) as kiji_counting from cate_connect ";
+$q1 = " select count(kiji_num) as kiji_counting from kiji ";
+$q1.= " where date_format(kiji_date, '%Y-%m') = \"$kiji_month_g\" ";
 
-if($flag==0){
-	$q1.= " where cate_no = $cate_no_g ";
-
-}elseif($flag==1){
-	$q1.= " where cate_s_no = $cate_s_no_g ";
-
-}
 
 queryarray($q1);
 
@@ -176,9 +125,8 @@ include "./cale_inc.php";
 $smarty_c -> assign("kiji_title",$kiji_title);		//記事のタイトル
 $smarty_c -> assign("kiji_date",$kiji_date);		//記事の日時
 $smarty_c -> assign("kiji",$kiji);					//記事内容
-$smarty_c -> assign("kijinumber",$kijinumber);		//記事の続きのURL
 $smarty_c -> assign("kiji_num",$kiji_num);			//記事のナンバー
-
+$smarty_c -> assign("kiji_month_g",$kiji_month_g);			//記事の月の表示
 @$smarty_c -> assign("cate_name",$cate_name);		//カテゴリタグの追加
 @$smarty_c -> assign("cate_s_name", $cate_s_name);	//カテゴリ小タグの追加
 @$smarty_c -> assign("cate_no",$cate_no);		//カテゴリタグの追加
@@ -186,18 +134,17 @@ $smarty_c -> assign("kiji_num",$kiji_num);			//記事のナンバー
 @$smarty_c -> assign("cate_no_g",$cate_no_g);		//カテゴリタグの追加
 @$smarty_c -> assign("cate_s_no_g", $cate_s_no_g);	//カテゴリ小タグの追加
 
-$smarty_c -> assign("flag",$flag);					//カテゴリの種類
-
 $smarty_c -> assign("kiji_count",$kiji_count);		//記事の数を追加
 
 $smarty_c -> assign("total_page",$total_page);		//ページの確認
 
 $smarty_c -> assign("kiji_counting",$kiji_counting);//記事の総数
 
-$smarty_c -> display("../tpl/category.tpl");				//記事をテンプレートへ！！！！
+$smarty_c -> display("../tpl/calender.tpl");				//記事をテンプレートへ！！！！
 
 //データベース切断
 $dbh = null;
+
 
 
 

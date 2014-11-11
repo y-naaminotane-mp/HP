@@ -16,10 +16,19 @@ include "./func/func.php";
 include "./env/selenv.inc";
 
 /*データベース呼び出し*/
-//include "./func/dbh.php";
+include "./func/dbh.php";
 
+
+/**************************************************
+
+フッター部分の挿入
+
+**************************************************/
+
+include "./cale_inc.php";
 
 $smarty_c -> display("../tpl/profile.tpl");			//記事をテンプレートへ！！！！
+
 
 
 //データベース切断

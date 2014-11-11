@@ -20,9 +20,25 @@
 
 .art_wrap pre{
 	white-sqace			:pre-wrap;							/*記事文が途中でも枠に収まるように折り返す、改行をそのまま表示する*/
-/**	text-indent			:10px;								/*記事の初めを下げる*/
 	word-break			:break-word;						/*記事が記事内にお触るようにする*/
 
+}
+
+.kiji_cate a{
+	background-color	:#000000;							/*カテゴリの背景*/
+	color				:#f0f0f0;							/**/
+	display				:inline-block;
+	width				:auto;
+	height				:auto;
+	text-align			:center;
+	text-decoration		:none;
+	padding				:0 1% 0 1%;
+}
+
+.kiji_cate a:hover{
+	background-color	:#A0A0A0;							/*カテゴリの背景*/
+	color				:#0A0A0A;							/**/
+	text-decoration		:underline;
 }
 
 
@@ -31,7 +47,25 @@
 
 
 *************************/
-	
+	.art_wrap h1{
+		font-size			:24px;
+
+	}
+
+	.art_wrap h5{
+		font-size			:13px;
+	}
+
+	.art_wrap pre{
+		line-height			:1.8;
+		font-size			:16px;
+
+	}
+
+	.kiji_cate a{
+		font-size			:15px;
+		padding				:1% 2%; 
+	}
 
 /*********************************************
 スマホ用終わり
@@ -44,7 +78,20 @@
 
 **********************************************/
 
-	@media only screen and (min-width:720px){
+	@media only screen and (min-width:768px){
+	.art_wrap h1{
+		font-size			:24px;
+
+	}
+
+	.art_wrap h5{
+		font-size			:16px;
+	}
+		
+	.kiji_cate a{
+		font-size			:18px;
+		padding				:1% 2%; 
+	}
 
 }
 
@@ -65,5 +112,22 @@
 
 **********************************************/
 @media only screen and (min-width:960px){
+	.art_wrap h1{
+		font-size			:26px;
+
+	}
+
+	.art_wrap h5{
+		font-size			:18px;
+	}
+
+	.art_wrap pre{
+		font-size			:20px;
+
+	}
+
+	.kiji_cate a{
+		font-size			:20px;
+	}
 
 }

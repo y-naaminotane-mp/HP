@@ -145,35 +145,17 @@
 		height			:100%;
 		vertical-align	:middle;
 	}
-
-	.morepage:hover{
-
-	}
-
-	.morepage a:hover{
-
-	}
 	
 	.page{
 		padding				:0;
 		width				:100%;
 	}
 
-	.page ul{
-
-	}
-
-	.page ul li{
-
-	}
-
 	.page ul li a{
-
 		font-size			:11px;
 	}
 
 	.c_page{
-
 		font-size			:11px;
 
 	}
@@ -187,6 +169,47 @@
 **********************************************/
 
 	@media only screen and (min-width:600px){
+	.kiji_wrap h1{
+		font-size		:24px;								/*記事のタイトル*/
+
+	}
+
+	.kiji_wrap h4{
+		font-size		:15px;								/*日時*/
+	}
+	
+	.kiji_wrap article span{
+		line-height		:1.8;								/*記事一部内容の行間*/
+		font-size		:18px;								
+	}
+
+	.morepage{
+		font-size		:16px;								/*フォントサイズ*/
+		margin			:3% auto 3% auto;						/*位置の調整*/
+				
+	}
+	
+	.morepage a{
+		padding			:3%;
+	}
+	
+	.page ul li a{
+		font-size			:14px;
+		padding				:2%;
+	}
+
+	.c_page{
+		font-size			:14px;
+		padding				:2%;
+	}
+	
+	.category_link p{
+		font-size			:15px;
+	}
+
+	.category_link a{
+		padding				:1% 2%;
+	}
 
 }
 
@@ -202,5 +225,42 @@
 
 **********************************************/
 @media screen and (min-width:960px){
+	.kiji_wrap h1{
+		font-size		:26px;								/*記事のタイトル*/
+
+	}
+
+	.kiji_wrap h4{
+		font-size		:16px;								/*日時*/
+	}
+	
+	.kiji_wrap article span{
+		line-height		:1.8;								/*記事一部内容の行間*/
+		font-size		:20px;								
+	}
+
+	.morepage{
+		font-size		:18px;								/*フォントサイズ*/
+		margin			:5% auto;						/*位置の調整*/
+				
+	}
+	
+	.page ul li a{
+		font-size			:14px;
+		padding				:3%;
+	}
+
+	.c_page{
+		font-size			:14px;
+		padding				:3%;
+	}
+	
+	.category_link p{
+		font-size			:15px;
+	}
+
+	.category_link a{
+		padding				:2% 3%;
+	}
 
 }

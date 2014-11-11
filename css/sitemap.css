@@ -15,10 +15,11 @@
 	padding				:3%	;								/*記事と枠との間*/
 	margin-bottom		:3%;								/*別の記事との間隔*/
 	box-shadow			:3px 3px 3px 1px;					/*記事ボックスの影*/
+	text-align			:left;
 }
 
 .art_wrap p{
-	text-align			:left;							/*記事文が途中でも枠に収まるように折り返す、改行をそのまま表示する*/
+							/*記事文が途中でも枠に収まるように折り返す、改行をそのまま表示する*/
 /**	text-indent			:10px;								/*記事の初めを下げる*/
 	
 
@@ -31,6 +32,17 @@
 
 *************************/
 	
+
+.art_wrap p{
+	font-size			:16px;
+	
+}
+
+.art_wrap li{
+	font-size			:14px;
+}
+
+
 
 /*********************************************
 スマホ用終わり
@@ -45,8 +57,18 @@
 
 	@media only screen and (min-width:720px){
 .art_wrap{
-		text-align		:left;
+	text-align			:left;
 }
+
+.art_wrap p{
+	font-size			:16px;
+	
+}
+
+.art_wrap li{
+	font-size			:14px;
+}
+
 
 
 }
@@ -68,9 +90,18 @@
 
 **********************************************/
 @media only screen and (min-width:960px){
-	
 	.art_wrap{
-		text-align		:left;
+		text-align			:left;
+	}
+
+	
+	.art_wrap p{
+		font-size			:20px;
+	
+	}
+
+	.art_wrap li{
+		font-size			:16px;
 	}
 
 }

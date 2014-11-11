@@ -75,6 +75,18 @@ $smarty_c -> assign("cate_s_no",$cate_s_no);		//小カテゴリナンバー
 $smarty_c -> assign("cate_s_name",$cate_s_name);	//小カテゴリ名
 $smarty_c -> assign("cate_s_count",$cate_s_count);	//カテゴリナンバー
 
+
+/**************************************************
+
+フッター部分の挿入
+
+**************************************************/
+
+
+include "./cale_inc.php";
+
+
+
 $smarty_c -> display("../tpl/sitemap.tpl");				//記事をテンプレートへ！！！！
 
 

@@ -19,7 +19,8 @@
 *****************************/
 $q ="";
 $q =" select date_format(kiji_date, '%Y-%m') as kiji_month, count(*) as m_count from kiji ";
-$q.=" group by date_format(kiji_date, '%Y%m') ";
+$q.=" group by date_format(kiji_date, '%Y-%m') ";
+$q.=" order by kiji_date ";
 
 queryarray($q);
 

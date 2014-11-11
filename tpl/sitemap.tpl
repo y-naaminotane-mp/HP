@@ -1,30 +1,18 @@
-<!DOCTYPE html>
-<html lang="ja"><head><title>ホームページ</title>
+{***************************************************************************
+サイトマップのtplファイル
 
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="../css/sitemap.css" type="text/css">
-    <link rel="stylesheet" href="../css/temple.css" type="text/css">
-    </head>
-<body>
-<div id = "wrapper">
-<!--ヘッダー-->
-<header>
-<div id="head">
-		<h1 >naaminotane</h1>
-        <p>ここでは日々のうっぷんを書いていきます</p>
-</div>
-</header>	
-<!--ヘッダーここまで-->
+mp	20141112	テンプレートまとめ		
 
 
-<!--サイト内リンク-->
-	<nav id="link">
-		<ul>
-		 <li><a href="index.html">●TOP</a></li>
-  		 <li><a href="profile.html">●PROFILE</a></li>
-		 <li><a href="sitemap.html">●MENU</a></li>
-		</ul>
-	</nav>
+***************************************************************************}
+
+{*ヘッドタグの中身を追加*}
+{capture name="header"}
+<link rel="stylesheet" href="../css/sitemap.css" type="text/css">
+{/capture}
+
+{include file="../tpl/header.tpl"}
+
     
 <main id="kiji">   
     
@@ -77,27 +65,5 @@
 
 </main>
 
-
-
-
 <!--プロフィール-->
-<aside id="profile">
-	<h2>プロフィール</h2>
-	<section>
-    		<p>プロフィールの内容はいろいろ書いていきます</p>
-    </section>	
-</aside>
-
-<!--プロフィールここまで-->
-
-<footer id="food">
-	<section>
-    <p>フッターの内容をここに書く</p>
-	</section>
-	<div id="copyright">
-		Copyright(C) MP All Right Reserved
-	</div>        
-</footer>
-
-</div>
-</body></html>
+{include file="../tpl/fooder.tpl"}

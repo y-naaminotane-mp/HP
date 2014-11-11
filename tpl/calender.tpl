@@ -15,30 +15,30 @@ mp	20141109	いろいろ修正、コメント追加
 {include file="../tpl/header.tpl"}
 
 
+<main id="kiji">
+
+
 <!--ブログのメインコンテンツがここに置かれている-->
 
-<main id="kiji">
+
 <!--ループを開始！！！！！-->
-{*****************************************
-記事のループ
 
-取得したデータが一つの時と二つ以上の時とで分ける
-
-*****************************************}
-
-{***記事のループ***}
 {include file="../tpl/kiji_row.tpl"}
 
-
 <!--ループ完了！！！！！！-->
+
+
 
 <!--記事終了-->
 
 
-<!--ここからページ送り-->
+
+<!--ここからページ送り-->    
 
 {capture name="get_name"}
-
+	{if !empty($kiji_month_g)}
+		&kiji_month={$kiji_month_g}
+	{/if}
 {/capture}
 
 {include file="../tpl/page.tpl"}
@@ -54,4 +54,3 @@ mp	20141109	いろいろ修正、コメント追加
 </main>
 
 {include file="../tpl/fooder.tpl"}
-
