@@ -168,7 +168,7 @@
 以下タブレット用追加
 **********************************************/
 
-	@media only screen and (min-width:600px){
+	@media only screen and (min-width:768px){
 	.kiji_wrap h1{
 		font-size		:24px;								/*記事のタイトル*/
 
@@ -260,7 +260,7 @@
 	}
 
 	.category_link a{
-		padding				:2% 3%;
+		padding				:1% 2%;
 	}
 
 }
