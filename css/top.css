@@ -10,13 +10,24 @@
 /*各機種共通の構成*/
 
 /*記事単位ごとの設定*/
+.kiji_line ul{
+	display			:block;
+	margin-top		:0px;
+	margin-left		:0px;
+	padding			:0px;
+}
+
+.kiji_line li{
+	display			:inline-block;
+	margin-top		:0px;
+}
+
 .kiji_wrap{
 	background-color	:#f0f0f0;							/*記事をひとつづつ白いので囲む*/
 	padding				:3%	;								/*記事と枠との間*/
 	margin-bottom		:3%;								/*別の記事との間隔*/
 	box-shadow			:3px 3px 3px 1px;					/*記事ボックスの影*/
 }
-
 
 /*記事の続きを見るボタンのスタイル*/
 .morepage{
@@ -116,6 +127,11 @@
 	スマホ用スタイルシート
 *************************/
 	/*記事の続きを見るボタンのスタイル*/
+
+	.kiji_line li{
+		width			:100%;
+	}
+
 	.kiji_wrap h1{
 		font-size		:20px;								/*記事のタイトル*/
 
@@ -169,6 +185,18 @@
 **********************************************/
 
 	@media only screen and (min-width:768px){
+
+	.kiji_line li{
+		width			:31%;
+		padding			:0 1% 2% 0;
+		vertical-align		: top;
+	}
+
+	.kiji_wrap{
+		margin-right		:1%;
+
+	}
+
 	.kiji_wrap h1{
 		font-size		:24px;								/*記事のタイトル*/
 

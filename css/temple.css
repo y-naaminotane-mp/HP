@@ -173,7 +173,7 @@ body{
 	display				:inline-block;
 	margin-left			:0;
 	padding				:0;
-	background-color	:#2f2f2f;
+	background-color		:#2f2f2f;
 	box-shadow			:0px 5px 2px #333, 0px 0px 3px #AFAFAF inset;
 }
 
@@ -350,8 +350,8 @@ body{
 	#kiji{
 		float			:right;											/*記事は右*/
 		width			:70%;											/*記事の範囲*/
-		margin			:1% 0% 1% 1.5%;									/*記事のマージン*/
-		padding			:0 0 0 1.5%;											/*記事のパディング*/
+		margin			:1% 0% 1% 0%;									/*記事のマージン*/
+		padding			:0;											/*記事のパディング*/
 
 	}
 	
