@@ -25,7 +25,7 @@
                     {/if}
 				{/for}
                 
-                <li><a href="?page={$total_page}{$smarty.capture.get_name}">last</a></li>
+                <li><a href="?page={$total_page}{$smarty.capture.get_name}">last({$total_page})</a></li>
             {/if}
             
 {*ページが初めのページ以外の時*}
